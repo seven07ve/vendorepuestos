@@ -1,0 +1,3 @@
+prod:
+  .settings:
+     path_info_key: REDIRECT_URL

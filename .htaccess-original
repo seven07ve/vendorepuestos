@@ -1,0 +1,50 @@
+addhandler x-httpd-php5-cgi .php
+
+
+RewriteEngine on
+RewriteCond %{SERVER_PORT} 80
+# RewriteRule ^(.*)$ http://localhost/vendorepuestos/$1 [R,L]
+# RewriteRule ^(.*)$ https://www.vendorepuestos.com.ve/$1 [R,L]
+RewriteBase /
+RewriteRule ^inicio /index.php
+RewriteRule ^([A-Za-z0-9_-]+)$ url_tr.php?tr=$1
+RewriteRule ^vendeTR /vende.php
+RewriteRule ^recuperar_datos /olvido_clave.php
+RewriteRule ^modificaTR /modifica.php
+RewriteRule ^notificaTR/([0-9]+) /notifica.php?num=$1
+RewriteRule ^tarifasTR /tarifas.php
+RewriteRule ^registroTR /registro.php
+RewriteRule ^iniciar_sesion /login.php
+RewriteRule ^salirTR /logout.php
+RewriteRule ^tiendarepuestos/([A-Za-z0-9_-]+)/([0-9]+) /directorio.php?tipo=$1&pg=$2
+RewriteRule ^nosotrosTR /nosotros.php
+RewriteRule ^contactoTR /contacto.php
+RewriteRule ^centro_pagos /pagos.php
+RewriteRule ^centro_seguridad/([0-9]+) /seguridad.php?num=$1
+RewriteRule ^preguntas_frecuentes /faq.php
+RewriteRule ^terminos_condiciones /terminos.php
+RewriteRule ^bienvenidoTR/([A-Za-z0-9_-]+) /bienvenido.php?ntr=$1
+RewriteRule ^mitr/([A-Za-z0-9_-]+) /cuenta.php?ntr=$1
+RewriteRule ^estado_cuenta/([A-Za-z0-9_-]+) /estadocuenta.php?ntr=$1
+RewriteRule ^publicaciones/([A-Za-z0-9_-]+) /publicacion.php?ntr=$1
+RewriteRule ^noticia/([A-Za-z0-9_-]+)/([0-9]+) /detalle_noticia.php?tit=$1&id=$2
+RewriteRule ^articulos_republicar/([A-Za-z0-9_-]+)/([0-9]+) /republicar.php?ntr=$1&ida=$2
+RewriteRule ^articulos_oferta/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+) /oferta.php?ntr=$1&sw=$2&idofer=$3
+RewriteRule ^articulos_activos/([A-Za-z0-9_-]+)/([0-9]+) /lista.php?ntr=$1&pg=$2
+RewriteRule ^mis_articulos /lista_result.php
+RewriteRule ^articulos_finalizados/([A-Za-z0-9_-]+)/([0-9]+) /lista_fin.php?ntr=$1&pg=$2
+RewriteRule ^datos_vendedor/([A-Za-z0-9_-]+) /datos.php?ntr=$1
+RewriteRule ^articulo_editar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_editar.php?ntr=$1&idp=$2
+RewriteRule ^articulo_eliminar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_eliminar.php?ntr=$1&idp=$2
+RewriteRule ^articulo/([A-Za-z0-9_-]+)/([0-9]+) /detalle.php?titulo=$1&idp=$2
+RewriteRule ^buscar/([0-9]+)/([A-Za-z0-9_-]+)/([a-z0-9_-]+)/([0-9]+) /resultado.php?categoria_buscar=$1&palabra=$2&ide=$3&pg=$4
+RewriteRule ^tr/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /tienda_lista.php?ntr=$1&id=$2&p=$3&f=$4&pg=$5
+RewriteRule ^tr_galeria/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+) /tienda.php?ntr=$1&id=$2&pg=$3
+RewriteRule ^tr_categoria/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /categorias_tienda.php?ntr=$1&id=$2&idm=$3&p=$4&$f=$5&pg=$6
+RewriteRule ^tr_ubicacion/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /ubicacion_tienda.php?ntr=$1&id=$2&ide=$3&p=$4&f=$5&pg=$6
+RewriteRule ^tr_resultado/([A-Za-z0-9_-]+)/([0-9]+)/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+) /resultado_tienda.php?ntr=$1&id=$2&xx=$3&p=$4&f=$5&pg=$6
+RewriteRule ^vista_nivel2/([A-Za-z0-9_-]+)/([0-9]+) /nivel_2.php?ncat=$1&idc=$2
+RewriteRule ^vista_nivel2_full/([A-Za-z0-9_-]+)/([0-9]+) /nivel_2_full.php?ncat=$1&idc=$2
+RewriteRule ^vista_nivel2_detalle/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_2_plus.php?ncat=$1&idc=$2&idm=$3&idsm=$4
+RewriteRule ^vista_nivel3/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_3.php?ncat=$1&idc=$2&idm=$3&idsm=$4&ide=$5&pg=$6
+RewriteRule ^vista_nivel4/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_4.php?ncat=$1&idc=$2&idm=$3&idsm=$4&idssm=$5&pg=$6

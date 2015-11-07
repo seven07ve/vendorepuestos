@@ -1,0 +1,27 @@
+.caption-top, .caption-bottom {
+	color: #ffffff;	
+	font-weight: normal;
+	font-size: 12px;	
+	font-family: Arial, Helvetica, sans-serif;	
+	cursor: default;
+	border: 0px solid #334143;
+	background: #000000;
+}
+.caption-top {
+   border-width: 0px 0px 8px 0px;
+}
+.caption-bottom {
+   border-width: 8px 0px 0px 0px;
+}
+.caption a, .caption a {
+	border: 0 none;
+	text-decoration: none;
+	background: #000000;
+}
+.caption a:hover, .caption a:hover {
+	background: #202020;
+}
+.caption-wrapper {
+	float: none;
+}
+br.c { clear: both; }

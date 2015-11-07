@@ -1,0 +1,80 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: puntoventa, action: pagoEsitef }
+  
+test:
+  url:   /test
+  param: { module: puntoventa, action: esitefTest }
+  requirements: { sf_method: get }
+
+comprando:
+  url: /comprando
+  param: { module: puntoventa, action: comprando }
+  requirements: {sf_method: get}
+
+nofinalizo:
+  url: /nofinalizo
+  param: { module: puntoventa, action: noFinalizo }
+  requirements: {sf_method: get}
+
+t_bloqueado:
+  url: /puntoventa/transaccionbloqueada
+  param: { module: puntoventa, action: tBloqueada}
+  requirements: {sf_method: get}
+
+t_negado:
+  url: /puntoventa/pagonegado
+  param: { module: puntoventa, action: tNegado }
+  requirements: {sf_method: get}
+  
+t_intentos_agotado:
+  url: /puntoventa/intentosAgotados
+  param: { module: puntoventa, action: tIntentosAgotados }
+  requirements: {sf_method: get}
+  
+crear_orden_pago:
+  url:   /crear-orden-pago
+  param: { module: puntoventa, action: createPaymentOrder }
+  requirements: { sf_method: get }
+
+pago:
+  url:   /pago/:order_id
+  class:   sfDoctrineRoute
+  options: { model: PaymentOrder, type: object }
+  param: { module: puntoventa, action: pagoEsitef }
+  requirements: { sf_method: get }
+  
+procesarpago:
+  url:   /procesar-pago/:order_id
+  class:   sfDoctrineRoute
+  options: { model: PaymentOrder, type: object }
+  param: { module: puntoventa, action: pagoEsitef }
+  requirements: { sf_method: post }
+  
+pagotienda:
+  url:   /pago-tienda/:order_id
+  param: { module: puntoventa, action: pagoTienda }
+  requirements: { sf_method: get }
+  
+procesarpagotienda:
+  url:   /procesar-pago-tienda/:order_id
+  param: { module: puntoventa, action: pagoTienda }
+  requirements: { sf_method: post }
+  
+confirmacionpago:
+  url:   /confirmacion-pago
+  param: { module: puntoventa, action: confirmacionPago }
+  requirements: { sf_method: get }
+
+# generic rules
+# please, remove them by adding more specific rules
+#default_index:
+#  url:   /:module
+#  param: { action: index }
+#
+#default:
+#  url:   /:module/:action/*

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+      #map {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+    	<link rel="stylesheet" type="text/css" href="http://static.evisos.com/cache_css/all_40.css" />	<link rel="stylesheet" type="text/css" href="http://static.evisos.com/cache_css/adspost2_40.css" />
+<link rel="stylesheet" type="text/css" href="http://static.evisos.com/cache_css/frontend_40.css" />
+	<script type="text/javascript" src="http://static.evisos.com/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script> 
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/common.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/util.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/stats.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/map.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/controls.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/places_impl.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/marker.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/onion.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/22/2/intl/es_ALL/infowindow.js"></script>
+</head>
+<body>
+<form action="/ads/add/autos-motos-usados" id="AdForm" class="form" onsubmit="event.returnValue = false; return false;" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/><input type="hidden" name="data[_Token][key]" value="b7c5579ec0d201f80e8cb5b4048f7d330b901ea6" id="Token1456267797"/></div><div class="container-form mycontainer">
+					<div class="input clearfix map-street-address">
+			<label for="AdStreetaddress" class="lbl">Ingrese una dirección</label>			<input name="data[Ad][streetaddress]" class="input-text" placeholder="(opcional)" maxlength="100" type="text" id="AdStreetaddress"/>			<div id="mapCanvas" class="map" style="display: none"></div>
+			<div style="display:none">
+				<input type="hidden" name="data[Ad][latitude]" id="AdLatitude"/>				<input type="hidden" name="data[Ad][longitude]" id="AdLongitude"/>			</div>
+		</div>
+	</form>
+</body>
+	<script>
+function initialize() {
+	var latLng = new google.maps.LatLng(10.505833, -66.914444);
+	var mapOptions = {
+		center: latLng,
+		zoom: 13,
+		mapTypeControl: false,
+		streetViewControl: false,
+		zoomControl: true,
+		scaleControl: true
+	};
+	var map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+	var input = document.getElementById('AdStreetaddress');
+
+	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+	var autocomplete = new google.maps.places.Autocomplete(input, {
+		componentRestrictions: {country: 'VE'}
+	});
+	autocomplete.bindTo('bounds', map);
+
+	var infowindow = new google.maps.InfoWindow();
+	var marker = new google.maps.Marker({
+		map: map,
+		position: latLng,
+		draggable: true
+	});
+	google.maps.event.addListener(marker, 'dragend', function(e) {
+		$('#AdLatitude').val(e.latLng.lat());
+		$('#AdLongitude').val(e.latLng.lng());
+	});
+
+	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		$('#AdStreetaddress').data('changed', 1);
+		infowindow.close();
+		marker.setVisible(false);
+		var place = autocomplete.getPlace();
+		if (!place.geometry) {
+			return;
+		}
+
+		// If the place has a geometry, then present it on a map.
+		if (place.geometry.viewport) {
+			map.fitBounds(place.geometry.viewport);
+		} else {
+			map.setCenter(place.geometry.location);
+			map.setZoom(17);  // Why 17? Because it looks good.
+		}
+		getLatLng();
+
+		marker.setIcon({
+			url: place.icon,
+			size: new google.maps.Size(71, 71),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(17, 34),
+			scaledSize: new google.maps.Size(35, 35)
+		});
+		marker.setPosition(place.geometry.location);
+		marker.setVisible(true);
+
+		var address = '';
+		if (place.address_components) {
+			address = [
+				(place.address_components[0] && place.address_components[0].short_name || ''),
+				(place.address_components[1] && place.address_components[1].short_name || ''),
+				(place.address_components[2] && place.address_components[2].short_name || '')
+			].join(' ');
+		}
+
+		infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+		infowindow.open(map, marker);
+	});
+
+	var getLatLng = function() {
+		var geocoder = new google.maps.Geocoder(), address = document.getElementById('AdStreetaddress').value;
+		geocoder.geocode({'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				$('#AdLatitude').val(results[0].geometry.location.lat());
+				$('#AdLongitude').val(results[0].geometry.location.lng());
+			} else {
+				console.log("Geocode was not successful for the following reason: " + status);
+			}
+		});
+	};
+
+	var lat = $('#AdLatitude').val();
+	var lng = $('#AdLongitude').val();
+	if (lat && lng) {
+		var latLng = new google.maps.LatLng(lat, lng);
+		map.setCenter(latLng);
+		map.setZoom(17);  // Why 17? Because it looks good.
+		marker.setPosition(latLng);
+		marker.setVisible(true);
+	}
+}
+google.maps.event.addDomListener(window, 'load', function() {
+	$('#AdStreetaddress').click(function(e, flag) {
+		if ($('#mapCanvas').html() == '') {
+			$('#mapCanvas').show();
+			initialize();
+			$(this).unbind('click');
+			if (flag != '1') {
+				setTimeout(function() {
+					$('#AdStreetaddress').focus();
+				}, 1000);
+			}
+		}
+	});
+	if ($('#AdStreetaddress').val() && EV_Action == 'edit') {
+		$('#AdStreetaddress').trigger('click', ['1']);
+	}
+});
+	</script>
+
+</html>

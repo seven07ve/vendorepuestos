@@ -1,0 +1,79 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: producto, action: search }
+
+producto:
+  url:     /producto/listado.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: list }
+  param:   { module: producto, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+producto_search:
+  url:     /producto/buscar.:sf_format
+  param:   { module: producto, action: search, sf_format: html }
+  
+producto_password:
+  url:     /producto/:id/autenticar.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: password, sf_format: html }
+  requirements: { sf_method: get }
+  
+producto_verify_password:
+  url:     /producto/:id/autenticar.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: password, sf_format: html }
+  requirements: { sf_method: post }
+ 
+producto_new:
+  url:     /producto/nuevo.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: new, sf_format: html }
+  requirements: { sf_method: get }
+ 
+producto_create:
+  url:     /producto/crear.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: new, sf_format: html }
+  requirements: { sf_method: post }
+ 
+producto_edit:
+  url:     /producto/:id/editar.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+ 
+producto_update:
+  url:     /producto/:id/actualizar.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: edit, sf_format: html }
+  requirements: { sf_method: put }
+  
+producto_update_payment:
+  url:     /producto/pagar-modificacion.:sf_format
+  param:   { module: producto, action: updatePayment, sf_format: html }
+
+producto_edition_succeded:
+  url:     /producto/confirmar-modificacion.:sf_format
+  param:   { module: producto, action: confirmacionModificacion, sf_format: html }
+ 
+producto_show:
+  url:     /producto/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: Productos, type: object }
+  param:   { module: producto, action: show, sf_format: html }
+  requirements: { sf_method: get }
+  
+populate_cities:
+  url:     /cargar/ciudades
+  param:   { module: producto, action: populateCities, sf_format: html }
