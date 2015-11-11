@@ -45,7 +45,8 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: 'http://vendorepuestos.com.ve/check-rif.php',
+            url: '/check-rif.php',
+/*            url: 'http://vendorepuestos.com.ve/check-rif.php',*/
             /*url: "check_username_availablity.php",*/
             data: dataString,
             success: function(data) {
@@ -107,7 +108,8 @@ $(document).ready(function(){
 		var dataString = 'nombre_oficial='+nomb;
 		$.ajax({
 			type: "POST",
-			url: 'http://vendorepuestos.com.ve/check-nombre.php',
+			url: '/check-nombre.php',
+/*			url: 'http://vendorepuestos.com.ve/check-nombre.php',*/
 			data: dataString,
 			success: function(data){
 				var resp = data;
@@ -137,7 +139,8 @@ $(document).ready(function(){
 		var dataString = 'nombre_razon='+razon;
 		$.ajax({
 			type: "POST",
-			url: 'http://vendorepuestos.com.ve/check-razon.php',
+			url: '/check-razon.php',
+/*			url: 'http://vendorepuestos.com.ve/check-razon.php',*/
 			data: dataString,
 			success: function(data){
 				var resp = data;
@@ -168,7 +171,8 @@ $(document).ready(function(){
 		console.log(estado);
 		$.ajax({
 			type: "GET",
-			url: 'http://vendorepuestos.com.ve/admini/funciones_ajax.php',
+			url: '/admini/funciones_ajax.php',
+/*			url: 'http://vendorepuestos.com.ve/admini/funciones_ajax.php',*/
 			data: estado,
 			success: function(transport){
 				/*$('#ciu').fadeIn(0).html("hola");*/
@@ -184,7 +188,8 @@ $(document).ready(function(){
 		var dataString = 'nombre_usuario='+razon;
 		$.ajax({
 			type: "POST",
-			url: 'http://vendorepuestos.com.ve/check-usuario.php',
+			url: '/check-usuario.php',
+/*			url: 'http://vendorepuestos.com.ve/check-usuario.php',*/
 			data: dataString,
 			success: function(data){
 				var resp = data;
