@@ -48,17 +48,25 @@ if($paso==2)
 		$monto_paquete = cual_costo_paquete($id_paquete);
 		$insert_paq = mysql_query("INSERT INTO paquete_usuario (id_paquete,id_usuario,usuario_tienda,estado, monto) VALUES ('$id_paquete','$id','2','0','$monto_paquete')");
 		//logo
-		if($_FILES["file"]["tmp_name"]!="") copy($_FILES["file"]["tmp_name"], $carpeta."/".$_FILES["file"]["name"]);
-		$update = mysql_query("UPDATE tienda_virtual SET logo='".$_FILES["file"]["name"]."' WHERE id='$id'");
+		if($_POST["file"]!="") copy("uploads-temp/".$_POST["file"], $carpeta."/".$_POST["file"]);
+		$update = mysql_query("UPDATE tienda_virtual SET logo='".$_POST["file"]."' WHERE id='$id'");
+/*		if($_FILES["file"]["tmp_name"]!="") copy($_FILES["file"]["tmp_name"], $carpeta."/".$_FILES["file"]["name"]);
+		$update = mysql_query("UPDATE tienda_virtual SET logo='".$_FILES["file"]["name"]."' WHERE id='$id'");*/
 		//fotos tienda
-		if($_FILES["file2"]["tmp_name"]!="") copy($_FILES["file2"]["tmp_name"], $carpeta."/".$_FILES["file2"]["name"]);
-		$update = mysql_query("UPDATE tienda_virtual SET foto1='".$_FILES["file2"]["name"]."' WHERE id='$id'");
+		if($_POST["file2"]!="") copy("uploads-temp/".$_POST["file2"], $carpeta."/".$_POST["file2"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto1='".$_POST["file2"]."' WHERE id='$id'");
+/*		if($_FILES["file2"]["tmp_name"]!="") copy($_FILES["file2"]["tmp_name"], $carpeta."/".$_FILES["file2"]["name"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto1='".$_FILES["file2"]["name"]."' WHERE id='$id'");*/
 		//fotos tienda
-		if($_FILES["file3"]["tmp_name"]!="") copy($_FILES["file3"]["tmp_name"], $carpeta."/".$_FILES["file3"]["name"]);
-		$update = mysql_query("UPDATE tienda_virtual SET foto2='".$_FILES["file3"]["name"]."' WHERE id='$id'");
+		if($_POST["file3"]!="") copy("uploads-temp/".$_POST["file3"], $carpeta."/".$_POST["file3"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto2='".$_POST["file3"]."' WHERE id='$id'");
+/*		if($_FILES["file3"]["tmp_name"]!="") copy($_FILES["file3"]["tmp_name"], $carpeta."/".$_FILES["file3"]["name"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto2='".$_FILES["file3"]["name"]."' WHERE id='$id'");*/
 		//fotos tienda
-		if($_FILES["file4"]["tmp_name"]!="") copy($_FILES["file4"]["tmp_name"], $carpeta."/".$_FILES["file4"]["name"]);
-		$update = mysql_query("UPDATE tienda_virtual SET foto3='".$_FILES["file4"]["name"]."' WHERE id='$id'");
+		if($_POST["file4"]!="") copy("uploads-temp/".$_POST["file4"], $carpeta."/".$_POST["file4"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto3='".$_POST["file4"]."' WHERE id='$id'");
+/*		if($_FILES["file4"]["tmp_name"]!="") copy($_FILES["file4"]["tmp_name"], $carpeta."/".$_FILES["file4"]["name"]);
+		$update = mysql_query("UPDATE tienda_virtual SET foto3='".$_FILES["file4"]["name"]."' WHERE id='$id'");*/
 		
 //		$params = "?email=$email&tienda=$id&monto=$monto_paquete";
                 $params = "?email=$email&eid=$id&act=new&amount=$monto_paquete&type=store";
@@ -141,20 +149,8 @@ El registro de su <span style="color:#69A02A;">TIENDAREPUESTOS</span> se ha real
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="/validator.js"></script>
+<script type="text/javascript" src="/upload.js"></script>
 <style type="text/css">
-.image-upload{
-  display: inline;
-  margin-left: 20px;
-}
-.image-upload > input{
-    display: none;
-}
-.image-upload img{
-  opacity:0.7;
-}
-.image-upload img:hover{
-  opacity:1;
-}
 #Info{
 padding: 3px; border-radius: 4px; display: none;
 }
@@ -291,7 +287,7 @@ function cargar_ciudad(menu,submenu)
 	method: 'get',
 	onSuccess: function(transport) {
 		$('ciu').update(transport.responseText);
-	}*/
+	}
 	});
 }
 function popUp(URL) {
@@ -361,34 +357,51 @@ while($categoria=mysql_fetch_array($sql_categoria)){
 <tr>
   <td class="desc">Logo:</td>
   <td colspan="2" class="campo">
-	<div class="image-upload">
-	<label for="file-input">
-		<img id="subir1" src="../imagenes/camera.png" /> <span class="blue">Recomendado 210x60</span>
-	</label>
-		<input id="file-input" name="file" type="file" class="form" onchange="cambiar('subir1');"/>
-	</div>
+		<div class="image-upload" style="margin: 0;">
+		
+		<label for="file-input">
+			<div id="cont-img">
+			<img id="subir" src="../images/camera2.png" />
+        			<div id="borrar" class="borrar"></div></div>
+    		</label>
+			<input type="file" name="images" id="file-input" />
+			<input type="hidden" name="file" id="img-file-input" value="">
+		</div>
+		<span class="blue" style="line-height: 60px; margin-left: 5px;">Recomendado 210x60</span>
 </td>
 </tr>
 <tr>
   <td class="desc">Fotos de la Tienda:</td>
   <td colspan="2" class="campo">
-	<div class="image-upload">
+	<div class="image-upload" style="margin: 0;">
+	
 	<label for="file-input2">
-		<img id="subir2" src="../imagenes/camera.png"/>
-	</label>
-		<input id="file-input2" name="file2" type="file" class="form" onchange="cambiar('subir2');"/>
+		<div id="cont-img2">
+		<img id="subir2" src="../images/camera.png" />
+      			<div id="borrar2" class="borrar"></div></div>
+  		</label>
+		<input type="file" name="images2" id="file-input2" />
+		<input type="hidden" name="file2" id="img-file-input2" value="">
 	</div>
 	<div class="image-upload">
+	
 	<label for="file-input3">
-		<img id="subir3" src="../imagenes/camera.png"/>
-	</label>
-		<input id="file-input3" name="file3" type="file" class="form" onchange="cambiar('subir3');"/>
+		<div id="cont-img3">
+		<img id="subir3" src="../images/camera.png" />
+      			<div id="borrar3" class="borrar"></div></div>
+  		</label>
+		<input type="file" name="images3" id="file-input3" />
+		<input type="hidden" name="file3" id="img-file-input3" value="">
 	</div>
 	<div class="image-upload">
+	
 	<label for="file-input4">
-		<img id="subir4" src="../imagenes/camera.png"/>
-	</label>
-		<input id="file-input4" name="file4" type="file" class="form" onchange="cambiar('subir4');"/>
+		<div id="cont-img4">
+		<img id="subir4" src="../images/camera.png" />
+      			<div id="borrar4" class="borrar"></div></div>
+  		</label>
+		<input type="file" name="images4" id="file-input4" />
+		<input type="hidden" name="file4" id="img-file-input4" value="">
 	</div>
   </td>
 </tr>
@@ -606,5 +619,75 @@ while($categoria=mysql_fetch_array($sql_categoria)){
     </tr>
 </table>
 <?php include("includes/footer.php"); ?>
+<script>
+/*--- logo ---*/
+$(document).ready(function(){
+	$("#file-input").change(function(evento){
+	montar(evento,"file-input","#subir");
+	});
+});
+$( "#cont-img" ).mouseover(function(){
+	mostrar("file-input","borrar");
+	$("#subir").css("opacity", "0.4");
+});
+$("#cont-img").mouseout(function(){
+	$("#borrar").css("display", "none");
+	$("#subir").css("opacity", "1");
+});
+$( "#borrar" ).click(function() {
+	borrar("file-input","#subir");
+	$("#subir").attr("src", "/images/camera2.png");
+});
+/*--- imagen 2 ---*/
+$("#file-input2").change(function(evento){
+	montar(evento,"file-input2","#subir2");
+	});
+$( "#cont-img2" ).mouseover(function(){
+	mostrar("file-input2","borrar2");
+	$("#subir2").css("opacity", "0.4");
+});
+$("#cont-img2").mouseout(function(){
+	$("#borrar2").css("display", "none");
+	$("#subir2").css("opacity", "1");
+});
+$( "#borrar2" ).click(function() {
+	borrar("file-input2","#subir2");
+	$("#subir2").attr("src", "/images/camera.png");
+});
+
+/*--- imagen 3 ---*/
+$("#file-input3").change(function(evento){
+	montar(evento,"file-input3","#subir3");
+});
+$( "#cont-img3" ).mouseover(function(){
+	mostrar("file-input3","borrar3");
+	$("#subir3").css("opacity", "0.4");
+});
+$("#cont-img3").mouseout(function(){
+	$("#borrar3").css("display", "none");
+	$("#subir3").css("opacity", "1");
+});
+$( "#borrar3" ).click(function() {
+	borrar("file-input3","#subir3");
+	$("#subir3").attr("src", "/images/camera.png");
+});
+
+/*--- imagen 4 ---*/
+$("#file-input4").change(function(evento){
+	montar(evento,"file-input4","#subir4");
+});
+$( "#cont-img4" ).mouseover(function(){
+	mostrar("file-input4","borrar4");
+	$("#subir4").css("opacity", "0.4");
+});
+$("#cont-img4").mouseout(function(){
+	$("#borrar4").css("display", "none");
+	$("#subir4").css("opacity", "1");
+});
+$( "#borrar4" ).click(function() {
+	borrar("file-input4","#subir4");
+	$("#subir4").attr("src", "/images/camera.png");
+});
+</script>
 </body>
 </html>
