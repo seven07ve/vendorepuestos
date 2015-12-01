@@ -71,25 +71,31 @@ function validar_login(form_login)
           <form id="form_login" name="form_login" method="post" action="/iniciar_sesion/" onSubmit="return validar_login(this);">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
-              <td><span class="blue">Bienvenidos<br />Ingresar a Mi TIENDAREPUESTOS</span><br /><br />
-              <span class="blue">Usuario</span><br />
-              <input type="text" name="login" class="formt2" /></td>
+              <td><span class="blue" id="ingreso">Entrar a Mi TIENDAREPUESTOS </span><br /><br />
+              <span class="blue"></span><br />
+              <img src="/imagenes/ico-user.jpg" alt="" style="line-height:36px; vertical-align: bottom;" /><input type="text" name="login" class="formt2 login-user" placeholder=" Usuario"/></td>
             </tr>
             <tr>
-              <td><span class="blue">Contrase&ntilde;a</span><br />
-              <input type="password" name="clave" class="formt2" /></td>
+              <td><br /><br />
+                <img src="/imagenes/ico-pass.jpg" alt="" style="line-height:36px; vertical-align: bottom;" /><input type="password" name="clave" class="formt2 login-user"  placeholder=" Contrase&ntilde;a"/>
+
+              </td>
             </tr>
             <tr>
-              <td><a href="/recuperar_datos/">&iquest;Olvidaste tu Contrase&ntilde;a?</a>
+              <td>
 <div style="text-align:center">
   <input type="hidden" name="usuario_tienda" value="2" />
                 <input type="hidden" name="act" value="login" />
-                <input name="" type="image"  value="Submit" src="/imagenes/btn_send.jpg" />
-              </div>
+                <br><br>
+                <input type="submit" name="submit" id="submit" value="Ingresar" class="login-button">
+                <br><br>
+                <a href="/recuperar_datos/" class="blue">&iquest;Olvidaste tu Contrase&ntilde;a?</a>
+                <!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_send.jpg" /> -->
+             </form> </div>
               </td>
             </tr>
           </table>
-          </form>
+
           </td>
           <td width="1" rowspan="4" valign="top" bgcolor="#D3D3D3"></td>
           <td width="300" rowspan="4" align="center" valign="middle"><script language='JavaScript' type='text/javascript' src='http://vendorepuestos.com.ve/publicidad/adx.js'></script>
@@ -116,9 +122,13 @@ function validar_login(form_login)
           <form name="form_reg" method="post" action="/registroTR/">
           <input name="usuario_tienda" type="hidden" value="2"/>
           <input type="hidden" name="paso" value="1" />
-          <span class="blue">¿Deseas una TIENDAREPUESTOS?</span><br />
-          <div align="center"><a href="/registroTR/"><input name="" type="image"  value="Submit" src="/imagenes/btn_inscribete.jpg" /></a><br />
-            <img src="/imagenes/icon_tr.jpg" width="33" height="25" hspace="5" vspace="5" /></div></form>
+          <div align="right">
+            <a href="/registroTR/" class="blue">¿Deseas una TIENDAREPUESTOS?</a><br />
+          </div>
+          <!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_inscribete.jpg" /><br />-->
+            <!-- <img src="/imagenes/icon_tr.jpg" width="33" height="25" hspace="5" vspace="5" /> -->
+            
+            </form>
           </td>
         </tr>        
     </table></td>

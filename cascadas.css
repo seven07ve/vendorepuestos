@@ -7,7 +7,7 @@ font-family: "Roboto";
 src: url("https://fonts.googleapis.com/css?family=Roboto");
 }
 body {
-	font-family: "Roboto", sans-serif;
+	font-family: "Roboto condensed", sans-serif;
 	font-size: 14px;
 	margin-left: 0px;
 	margin-top: 0px;
@@ -123,12 +123,13 @@ A:hover
 .blue {
 	color: #69A02A;
 	text-decoration: none; font-weight:bold;
-	font-size:14px;
+	font-size:15px;
 }
+
 .green {
 	color: #2617BC;
 	text-decoration: none; font-weight:bold;
-	font-size:13px;
+	font-size:15px;
 }
 .bluep {
 	color: #2617BC;
@@ -568,4 +569,36 @@ ul.error_list{list-style:none;padding:0;color:#EF363B}
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+/*-------------------> login -------------------*/
+#ingreso{
+	font-size: 18px;
+}
+
+.login-user{
+	height: 32px;
+	border-radius: 0px 8px 8px 0px;
+	padding-left: 5px;
+
+}
+.login-user:focus{
+	border-color: #D3D3D3;
+	box-shadow: #59CD59 0px 0px 4px;
+	outline: 0;
+}
+
+.login-button{
+	font-family: "Roboto condensed";
+	font-size: 16px;
+	font-weight: bold;
+	color: #69A02A;
+	padding: 3px 14px;
+	border: solid 1px #D3D3D3;
+	border-radius: 8px;
+}
+.login-button:hover{
+	border-color: #D3D3D3;
+	box-shadow: #59CD59 0px 0px 4px;
+	outline: 0;
+	opacity: .8;
 }
