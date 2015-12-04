@@ -24,7 +24,7 @@ function montar(evento,inputId,imgId){
 
 function mostrar(inputId,borrar){
 	if($("#img-"+inputId).val() == ""){
-		/*console.log("#img-"+inputId);*/
+		console.log("#img-"+inputId);
 	}
 	else{
 		$("#"+borrar).css("display", "inline-block");
@@ -52,13 +52,8 @@ function borrar(inputId,imgId){
 }
 
 	/*input.addEventListener("change", function (evt){*/
-	/*function carga(evt,inputId,imgId,actualizar,dir){*/
-	function carga(evt,pas){
-		var inputId = pas["idObj"];
-		var imgId = pas["idImg"];
-		var  actualizar = pas["tipo"];
-		var dir = pas["dir"];
-		console.log(pas["dir"]);
+	function carga(evt,inputId,imgId){
+
 		/*console.log(inputId);*/
 		var input = document.getElementById(inputId);
 		
@@ -91,7 +86,7 @@ function borrar(inputId,imgId){
 
 		if (formdata) {
 			$.ajax({
-				url: "/"+dir,
+				url: "/uploaded.php",
 				type: "POST",
 				data: formdata,
 				processData: false,
@@ -108,14 +103,9 @@ function borrar(inputId,imgId){
 
 					}
 					else{
-						if (actualizar == "actualizar"){
-							$("#imgactual").attr("src", "/"+res);	
-						}
-						else{
-							$(imgId).attr("src", "/uploads-temp/"+res);
-							$(imgId).attr("class", "");
-							$(inp).attr("value", res);
-						}
+						$(imgId).attr("src", "/uploads-temp/"+res);
+						$(imgId).attr("class", "");
+						$(inp).attr("value", res);
 					}
 					/*$(inp).attr("id", "img-"+inputId);*/
 					/*$(".image-upload").append(inp);*/

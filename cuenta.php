@@ -82,9 +82,12 @@ $carpeta = limpiar_cadena($resul["razon_social"]);
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>.:: Vendorepuestos.com.ve ::.</title>
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/prototype.js"></script>
+<!-- <script type="text/javascript" src="/js/prototype.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="/validator.js"></script>
+<script type="text/javascript" src="/upload.js"></script>
 <style type="text/css">
-.image-upload{
+/* .image-upload{
   display: inline;
   margin-left: 20px;
 }
@@ -96,7 +99,7 @@ $carpeta = limpiar_cadena($resul["razon_social"]);
 }
 .image-upload img:hover{
   opacity:1;
-}
+} */
 </style>
 <script type="text/javascript">
 function validar(formy)
@@ -151,27 +154,36 @@ function validar(formy)
   }
   return true;
 }
-function cargar_ciudad(menu,submenu)
-{
-  new Ajax.Request("/admini/funciones_ajax.php?buscar=10&edo="+menu+"&ciu="+submenu,{
+function cargar_ciudad(menu,submenu){
+/*  new Ajax.Request("/admini/funciones_ajax.php?buscar=10&edo="+menu+"&ciu="+submenu,{
   method: 'get',
   onSuccess: function(transport) {
     $('ciu').update(transport.responseText);
   }
+  });*/
+  var dataString = 'buscar=10,edo='+menu+',ciu='+submenu;
+  $.ajax({
+    type: "POST",
+    url: 'http://vendorepuestos.com.ve/admini/funciones_ajax.php',
+    data: dataString,
+    success: function(transport) {
+      $('#ciu').fadeIn(0).html(transport);
+/*      $('#ciu').update(transport.responseText);*/
+    }
   });
 }
-function popUp(URL) {
+/*function popUp(URL) {
 day = new Date();
 id = day.getTime();
 eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=600,height=400,left = 212,top = 184');");
-}
+}*/
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function cambiar(elemId){
   var img = document.getElementById(elemId);
   img.src = "http://vendorepuestos.com.ve/imagenes/camera-ok.png";
 }
-</script>
+</script> -->
 </head>
 <body>
 <?php include("includes/header.php"); ?>
@@ -243,17 +255,29 @@ function cambiar(elemId){
           <td class="campo">
             <?php
             if($resul["logo"]!=""){
-              echo '<img src="/'.$carpeta.'/'.$resul["logo"].'" height="50" />';
+              echo '<br><br><img id="imgactual" src="/'.$carpeta.'/'.$resul["logo"].'" />';
             }
             ?>
             </td>
             <td>
-            <div class="image-upload">
-              <label for="file-input">
-                Cambiar: <img id="subir1" src="../../imagenes/camera.png"/>
-              </label>
-              <input id="file-input" name="file" type="file" class="form" onchange="cambiar('subir1');" />
-            </div>
+    <div class="image-upload" style="margin: 0;">
+    <span class="blue" style="line-height: 60px; margin-left: 5px;">Recomendado 210x60</span>
+    <label for="file-input">
+      <div id="cont-img">
+      <img id="subir" src="../images/camera2.png" />
+              <div id="borrar" class="borrar"></div></div>
+        </label>
+      <input type="file" name="images" id="file-input" />
+      <input type="hidden" name="file" id="img-file-input" value="">
+    </div>
+    
+<!--             <div class="image-upload">
+  <label for="file-input">
+    Cambiar: <img id="subir1" src="../../imagenes/camera.png"/>
+  </label>
+  <input id="file-input" name="file" type="file" class="form" onchange="cambiar('subir1');" />
+ -->
+    </div>
             </td>
         </tr>
         <tr>
@@ -475,5 +499,39 @@ function cambiar(elemId){
   </td>
 </tr>
 </table>
-<?php include("includes/footer.php"); ?></body>
+<?php include("includes/footer.php"); ?>
+<script>
+  /*--- logo ---*/
+      /*
+      para  el evento change
+    la primera el id del objeto label, 
+    La segunda el id del objeto img, 
+    La tercera "actualizar" si es para actualizar imagenes. O "" si es para carga normal,
+    La Cuarta es para saber a que archivo .php apuntar
+    */
+$(document).ready(function(){
+  $("#file-input").change(function(evento){
+    var pas = {
+      idObj: "file-input",
+      idImg: "#subir",
+      tipo: "actualizar",
+      dir: "update-logo.php"
+    };
+  montar(evento,pas);
+  });
+});
+$( "#cont-img" ).mouseover(function(){
+  mostrar("file-input","borrar");
+  $("#subir").css("opacity", "0.4");
+});
+$("#cont-img").mouseout(function(){
+  $("#borrar").css("display", "none");
+  $("#subir").css("opacity", "1");
+});
+$( "#borrar" ).click(function() {
+  borrar("file-input","#subir");
+  $("#subir").attr("src", "/images/camera2.png");
+});
+</script>
+</body>
 </html>

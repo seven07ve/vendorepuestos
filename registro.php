@@ -270,8 +270,7 @@ function validar_tienda(formy)
 	return true;
 }
 
-function cargar_ciudad(menu,submenu)
-{
+function cargar_ciudad(menu,submenu){
 	var dataString = 'buscar=10,edo='+menu+',ciu='+submenu;
 	$.ajax({
 		type: "POST",
@@ -623,7 +622,20 @@ while($categoria=mysql_fetch_array($sql_categoria)){
 /*--- logo ---*/
 $(document).ready(function(){
 	$("#file-input").change(function(evento){
-	montar(evento,"file-input","#subir");
+	/*montar(evento,"file-input","#subir","","uploaded.php");*/
+	/*
+	la primera el id del objeto label, 
+	La segunda el id del objeto img, 
+	La tercera update si es para actualizar imagenes. O "" si es para carga normal,
+	La Cuarta es para saber a que archivo .php apuntar
+	*/
+	    var pas = {
+	      idObj: "file-input",
+	      idImg: "#subir",
+	      tipo: "",
+	      dir: "uploaded.php"
+	    };
+	  montar(evento,pas);
 	});
 });
 $( "#cont-img" ).mouseover(function(){
@@ -640,7 +652,13 @@ $( "#borrar" ).click(function() {
 });
 /*--- imagen 2 ---*/
 $("#file-input2").change(function(evento){
-	montar(evento,"file-input2","#subir2");
+	    var pas = {
+	      idObj: "file-input2",
+	      idImg: "#subir2",
+	      tipo: "",
+	      dir: "uploaded.php"
+	    };
+	  montar(evento,pas);
 	});
 $( "#cont-img2" ).mouseover(function(){
 	mostrar("file-input2","borrar2");
@@ -657,7 +675,14 @@ $( "#borrar2" ).click(function() {
 
 /*--- imagen 3 ---*/
 $("#file-input3").change(function(evento){
-	montar(evento,"file-input3","#subir3");
+	var pas = {
+		idObj: "file-input3",
+		idImg: "#subir3",
+		tipo: "",
+		dir: "uploaded.php"
+	};
+	montar(evento,pas);
+	});
 });
 $( "#cont-img3" ).mouseover(function(){
 	mostrar("file-input3","borrar3");
@@ -674,7 +699,14 @@ $( "#borrar3" ).click(function() {
 
 /*--- imagen 4 ---*/
 $("#file-input4").change(function(evento){
-	montar(evento,"file-input4","#subir4");
+	var pas = {
+		idObj: "file-input4",
+		idImg: "#subir4",
+		tipo: "",
+		dir: "uploaded.php"
+	};
+	montar(evento,pas);
+	});
 });
 $( "#cont-img4" ).mouseover(function(){
 	mostrar("file-input4","borrar4");
