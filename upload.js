@@ -17,8 +17,7 @@
 
 function montar(evento,inputId,imgId){
       evento.preventDefault();
-      $(imgId).attr("class", "loader");
-      $(imgId).attr("src", "../images/cargando.fw.png");
+
       carga(evento,inputId,imgId);
 }	
 
@@ -58,8 +57,10 @@ function borrar(inputId,imgId){
 		var imgId = pas["idImg"];
 		var  actualizar = pas["tipo"];
 		var dir = pas["dir"];
-		console.log(pas["dir"]);
+		/*console.log(pas["dir"]);*/
 		/*console.log(inputId);*/
+		$(imgId).attr("class", "loader");
+		$(imgId).attr("src", "../images/cargando.fw.png");
 		var input = document.getElementById(inputId);
 		
 		formdata = false;

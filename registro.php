@@ -682,7 +682,6 @@ $("#file-input3").change(function(evento){
 		dir: "uploaded.php"
 	};
 	montar(evento,pas);
-	});
 });
 $( "#cont-img3" ).mouseover(function(){
 	mostrar("file-input3","borrar3");
@@ -706,7 +705,6 @@ $("#file-input4").change(function(evento){
 		dir: "uploaded.php"
 	};
 	montar(evento,pas);
-	});
 });
 $( "#cont-img4" ).mouseover(function(){
 	mostrar("file-input4","borrar4");
