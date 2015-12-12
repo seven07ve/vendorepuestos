@@ -292,7 +292,9 @@ function cambiar(elemId){
             <td>
             <div class="image-upload">
               <label for="file-input2">
-                Cambiar: <img id="subir2" src="../../imagenes/camera.png"/>
+                Cambiar:    <div id="cont-img2">
+    <img id="subir2" src="../images/camera.png" />
+            <div id="borrar2" class="borrar"></div></div>
               </label>
               <input id="file-input2" name="file2" type="file" class="form" onchange="cambiar('subir2');" />
             </div>
@@ -531,6 +533,74 @@ $("#cont-img").mouseout(function(){
 $( "#borrar" ).click(function() {
   borrar("file-input","#subir");
   $("#subir").attr("src", "/images/camera2.png");
+});
+/*--- imagen 2 ---*/
+$("#file-input2").change(function(evento){
+      var pas = {
+        idObj: "file-input2",
+        idImg: "#subir2",
+        tipo: "actualizar",
+        dir: "update-img1.php"
+      };
+    montar(evento,pas);
+  });
+$( "#cont-img2" ).mouseover(function(){
+  mostrar("file-input2","borrar2");
+  $("#subir2").css("opacity", "0.4");
+});
+$("#cont-img2").mouseout(function(){
+  $("#borrar2").css("display", "none");
+  $("#subir2").css("opacity", "1");
+});
+$( "#borrar2" ).click(function() {
+  borrar("file-input2","#subir2");
+  $("#subir2").attr("src", "/images/camera.png");
+});
+
+/*--- imagen 3 ---*/
+$("#file-input3").change(function(evento){
+  var pas = {
+    idObj: "file-input3",
+    idImg: "#subir3",
+    tipo: "actualizar",
+    dir: "update-img2.php"
+  };
+  montar(evento,pas);
+});
+$( "#cont-img3" ).mouseover(function(){
+  mostrar("file-input3","borrar3");
+  $("#subir3").css("opacity", "0.4");
+});
+$("#cont-img3").mouseout(function(){
+  $("#borrar3").css("display", "none");
+  $("#subir3").css("opacity", "1");
+});
+$( "#borrar3" ).click(function() {
+  borrar("file-input3","#subir3");
+  $("#subir3").attr("src", "/images/camera.png");
+});
+
+/*--- imagen 4 ---*/
+$("#file-input4").change(function(evento){
+  var pas = {
+    idObj: "file-input4",
+    idImg: "#subir4",
+    tipo: "actualizar",
+    dir: "update-img3.php"
+  };
+  montar(evento,pas);
+});
+$( "#cont-img4" ).mouseover(function(){
+  mostrar("file-input4","borrar4");
+  $("#subir4").css("opacity", "0.4");
+});
+$("#cont-img4").mouseout(function(){
+  $("#borrar4").css("display", "none");
+  $("#subir4").css("opacity", "1");
+});
+$( "#borrar4" ).click(function() {
+  borrar("file-input4","#subir4");
+  $("#subir4").attr("src", "/images/camera.png");
 });
 </script>
 </body>

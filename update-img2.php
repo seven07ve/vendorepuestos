@@ -11,13 +11,13 @@ $res = mysql_query($sql);
 $resul= mysql_fetch_array($res);
 $carpeta = limpiar_cadena($resul["razon_social"]);
 $id = $resul["id"];
-$imagen_actual = $resul["logo"];
+$imagen_actual = $resul["foto2"];
 
 foreach ($_FILES["images"]["error"] as $key => $error){
 	if ($error == UPLOAD_ERR_OK){
 		$name = $carpeta."/". $_FILES['images']['name'][$key];
 		move_uploaded_file( $_FILES["images"]["tmp_name"][$key], $carpeta."/". $_FILES['images']['name'][$key]);
-		$update = mysql_query("UPDATE tienda_virtual SET logo='".$_FILES['images']['name'][$key]."' WHERE id='$id'");
+		$update = mysql_query("UPDATE tienda_virtual SET foto2='".$_FILES['images']['name'][$key]."' WHERE id='$id'");
 		$imagen= $carpeta."/".$imagen_actual;
  		unlink($imagen);
   	}

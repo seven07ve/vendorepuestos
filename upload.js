@@ -57,10 +57,10 @@ function borrar(inputId,imgId){
 		var imgId = pas["idImg"];
 		var  actualizar = pas["tipo"];
 		var dir = pas["dir"];
-		/*console.log(pas["dir"]);*/
-		/*console.log(inputId);*/
-		$(imgId).attr("class", "loader");
-		$(imgId).attr("src", "../images/cargando.fw.png");
+/*		console.log(pas["idObj"]);
+		console.log(pas["idImg"]);
+		console.log(pas["tipo"]);
+		console.log(pas["dir"]);*/
 		var input = document.getElementById(inputId);
 		
 		formdata = false;
@@ -71,15 +71,19 @@ function borrar(inputId,imgId){
 		
 		/*document.getElementById("response").innerHTML = "Uploading . . ."*/
 		var i = 0, len =input.files.length, img, reader, file;
-		/*console.log(len);*/
+		
+		console.log("len"+len);
 		for ( ; i < len; i++) {
 			/*console.log(i);*/
 			file = input.files[i];
+
+			console.log("hola"+file.type);	
 				/*console.log(file);*/
 			if (!!file.type.match(/image.*/)) {
 				if (window.FileReader) {
 					reader = new FileReader();
 					reader.onloadend = function(e){
+						console.log("test"+e.target.result);
 						showUploadedItem(e.target.result,file.fileName);
 					};
 					reader.readAsDataURL(file);
@@ -89,8 +93,12 @@ function borrar(inputId,imgId){
 				}
 			}
 		}
-
 		if (formdata) {
+			/*si hay imagen*/
+			if (len == 1){
+			$(imgId).attr("class", "loader");
+			$(imgId).attr("src", "../images/cargando.fw.png");
+			console.log(len);
 			$.ajax({
 				url: "/"+dir,
 				type: "POST",
@@ -110,7 +118,14 @@ function borrar(inputId,imgId){
 					}
 					else{
 						if (actualizar == "actualizar"){
-							$("#imgactual").attr("src", "/"+res);	
+							$(imgId).attr("class", "");
+							if (inputId == "file-input"){
+								$(imgId).attr("src", "../images/camera2.png");
+							}
+							else{
+								$(imgId).attr("src", "../images/camera.png");
+							}
+							$("#imgactual").attr("src", "/"+res);
 						}
 						else{
 							$(imgId).attr("src", "/uploads-temp/"+res);
@@ -122,6 +137,7 @@ function borrar(inputId,imgId){
 					/*$(".image-upload").append(inp);*/
 				}
 			});
+			}
 		}
 	}/*,false);*/
 /*}());*/
