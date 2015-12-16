@@ -15,12 +15,21 @@ $imagen_actual = $resul["logo"];
 
 foreach ($_FILES["images"]["error"] as $key => $error){
 	if ($error == UPLOAD_ERR_OK){
-		$name = $carpeta."/". $_FILES['images']['name'][$key];
-		move_uploaded_file( $_FILES["images"]["tmp_name"][$key], $carpeta."/". $_FILES['images']['name'][$key]);
-		$update = mysql_query("UPDATE tienda_virtual SET logo='".$_FILES['images']['name'][$key]."' WHERE id='$id'");
+		$resultado = mysql_query("SELECT * FROM tienda_virtual WHERE id='".$_SESSION["userid"]."' AND (logo='".$_FILES['images']['name'][$key]."' OR foto1='".$_FILES['images']['name'][$key]."' OR foto2='".$_FILES['images']['name'][$key]."' OR foto3='".$_FILES['images']['name'][$key]."')");
+		$numero_filas = mysql_num_rows($resultado);
+		if ($numero_filas == 1){
+			$dir = $carpeta."/1-". $_FILES['images']['name'][$key];
+			$name = "1-".$_FILES['images']['name'][$key];
+		}
+		else{
+			$dir = $carpeta."/". $_FILES['images']['name'][$key];
+			$name = $_FILES['images']['name'][$key];
+		}
+		move_uploaded_file( $_FILES["images"]["tmp_name"][$key], $dir);
+		$update = mysql_query("UPDATE tienda_virtual SET logo='".$name."' WHERE id='$id'");
 		$imagen= $carpeta."/".$imagen_actual;
  		unlink($imagen);
   	}
 }
-echo $name;
+echo $dir;
 ?>

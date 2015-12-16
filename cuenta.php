@@ -38,7 +38,7 @@ if($_POST['editar']){
   $update = "UPDATE tienda_virtual SET usuario='$usuario', clave='$contrasena', nombre_oficial='$nombre_oficial', telefono2='$telefono2', pin='$pin', id_estado='$id_estado', id_ciudad='$id_ciudad', direccion='$direccion', latitud='$latitud', longitud='$longitud', pagina_web='$pagina_web', facebook='$facebook', twitter='$twitter', email='$email', descripcion='$descripcion', horario='$horario',color_titulo='$color_titulo',color_fondo='$color_fondo', color_contenido='$color_contenido',persona_mantenimiento='$persona_mantenimiento',telefono_mantenimiento='$telefono_mantenimiento',email_mantenimiento='$email_mantenimiento' WHERE id='$id'";
   $actualizar=mysql_query($update);
   //crear carpeta 
-  $carpeta = limpiar_cadena($razon_social);
+/*  $carpeta = limpiar_cadena($razon_social);
   //logo
   if($_FILES["file"]["tmp_name"]!="") 
   {
@@ -62,12 +62,14 @@ if($_POST['editar']){
   {
     copy($_FILES["file4"]["tmp_name"], $carpeta."/".$_FILES["file4"]["name"]);
     $update = mysql_query("UPDATE tienda_virtual SET foto3='".$_FILES["file4"]["name"]."' WHERE id='$id'");
-  }?>
+  }*/
+ } 
+ ?>
 <!-- <script language="javascript">
 alert("Datos Actualizados con exito!"); window.location="cuenta.php";
 </script>
 -->
-<? }
+<? 
 
 //if($_SESSION["usertipo"]==1) $sql = "SELECT * FROM usuario WHERE id=$id";elseif($_SESSION["usertipo"]==2)
 $sql = "SELECT * FROM tienda_virtual WHERE id=$_SESSION[userid]";
@@ -255,7 +257,10 @@ function cambiar(elemId){
           <td class="campo">
             <?php
             if($resul["logo"]!=""){
-              echo '<br><br><img id="imgactual" src="/'.$carpeta.'/'.$resul["logo"].'" />';
+              echo '<br><br><img id="imgactual-file-input" src="/'.$carpeta.'/'.$resul["logo"].'" height="60"/>';
+            }
+            else{
+              echo '<img id="imgactual-file-input" src="" height="50" />';
             }
             ?>
             </td>
@@ -276,8 +281,8 @@ function cambiar(elemId){
     Cambiar: <img id="subir1" src="../../imagenes/camera.png"/>
   </label>
   <input id="file-input" name="file" type="file" class="form" onchange="cambiar('subir1');" />
+  </div>
  -->
-    </div>
             </td>
         </tr>
         <tr>
@@ -285,19 +290,32 @@ function cambiar(elemId){
           <td class="campo">
             <?php
             if($resul["foto1"]!=""){
-              echo '<img src="/'.$carpeta.'/'.$resul["foto1"].'" height="50" />';
+              echo '<img id="imgactual-file-input2" src="/'.$carpeta.'/'.$resul["foto1"].'" height="60" />';
+            }
+            else{
+              echo '<img id="imgactual-file-input2" src="" height="50" />';
             }
             ?>
             </td>
             <td>
-            <div class="image-upload">
+              <div class="image-upload" style="margin: 0;">
+              
               <label for="file-input2">
-                Cambiar:    <div id="cont-img2">
+                <div id="cont-img2">
+                <img id="subir2" src="../images/camera.png" />
+                        <div id="borrar2" class="borrar"></div></div>
+                  </label>
+                <input type="file" name="images2" id="file-input2" />
+                <input type="hidden" name="file2" id="img-file-input2" value="">
+              </div>
+<!--             <div class="image-upload">
+  <label for="file-input2">
+    Cambiar:    <div id="cont-img2">
     <img id="subir2" src="../images/camera.png" />
-            <div id="borrar2" class="borrar"></div></div>
-              </label>
-              <input id="file-input2" name="file2" type="file" class="form" onchange="cambiar('subir2');" />
-            </div>
+<div id="borrar2" class="borrar"></div></div>
+  </label>
+  <input id="file-input2" name="file2" type="file" class="form" onchange="cambiar('subir2');" />
+</div> -->
             </td>
         </tr>
         <tr>
@@ -305,17 +323,30 @@ function cambiar(elemId){
           <td class="campo">
             <?php 
             if($resul["foto2"]!=""){
-              echo '<img src="/'.$carpeta.'/'.$resul["foto2"].'" height="50" />';
+              echo '<img id="imgactual-file-input3" src="/'.$carpeta.'/'.$resul["foto2"].'" height="50" />';
+            }
+            else{
+              echo '<img id="imgactual-file-input3" src="" height="50" />';
             }
             ?>
             </td>
             <td>
-            <div class="image-upload">
+            <div class="image-upload" style="margin: 0;">
+              
               <label for="file-input3">
-                Cambiar: <img id="subir3" src="../../imagenes/camera.png"/>
-              </label>
-              <input id="file-input3" name="file3" type="file" class="form" onchange="cambiar('subir3');" />
-            </div>
+                <div id="cont-img3">
+                <img id="subir3" src="../images/camera.png" />
+                        <div id="borrar3" class="borrar"></div></div>
+                  </label>
+                <input type="file" name="images3" id="file-input3" />
+                <input type="hidden" name="file3" id="img-file-input3" value="">
+              </div>
+<!--             <div class="image-upload">
+  <label for="file-input3">
+    Cambiar: <img id="subir3" src="../../imagenes/camera.png"/>
+  </label>
+  <input id="file-input3" name="file3" type="file" class="form" onchange="cambiar('subir3');" />
+</div> -->
             </td>
         </tr>
         <tr>
@@ -323,17 +354,30 @@ function cambiar(elemId){
           <td class="campo">
             <?php
             if($resul["foto3"]!=""){
-              echo '<img src="/'.$carpeta.'/'.$resul["foto3"].'" height="50" />';
+              echo '<img id="imgactual-file-input4" src="/'.$carpeta.'/'.$resul["foto3"].'" height="50" />';
+            }
+            else{
+              echo '<img id="imgactual-file-input4" src="" height="50" />';
             }
             ?>
             </td>
             <td>
-            <div class="image-upload">
+            <div class="image-upload" style="margin: 0;">
+              
               <label for="file-input4">
-                Cambiar: <img id="subir4" src="../../imagenes/camera.png"/>
-              </label>
-              <input id="file-input4" name="file4" type="file" class="form" onchange="cambiar('subir4');"/>
-            </div>
+                <div id="cont-img4">
+                <img id="subir4" src="../images/camera.png" />
+                        <div id="borrar4" class="borrar"></div></div>
+                  </label>
+                <input type="file" name="images4" id="file-input4" />
+                <input type="hidden" name="file4" id="img-file-input4" value="">
+              </div>
+<!--             <div class="image-upload">
+  <label for="file-input4">
+    Cambiar: <img id="subir4" src="../../imagenes/camera.png"/>
+  </label>
+  <input id="file-input4" name="file4" type="file" class="form" onchange="cambiar('subir4');"/>
+</div> -->
             </td>
         </tr>
         <tr>

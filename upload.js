@@ -57,10 +57,10 @@ function borrar(inputId,imgId){
 		var imgId = pas["idImg"];
 		var  actualizar = pas["tipo"];
 		var dir = pas["dir"];
-/*		console.log(pas["idObj"]);
+		console.log(pas["idObj"]);
 		console.log(pas["idImg"]);
 		console.log(pas["tipo"]);
-		console.log(pas["dir"]);*/
+		console.log(pas["dir"]);
 		var input = document.getElementById(inputId);
 		
 		formdata = false;
@@ -118,6 +118,8 @@ function borrar(inputId,imgId){
 					}
 					else{
 						if (actualizar == "actualizar"){
+							var imgAct = "#imgactual-"+inputId
+							console.log(imgAct);
 							$(imgId).attr("class", "");
 							if (inputId == "file-input"){
 								$(imgId).attr("src", "../images/camera2.png");
@@ -125,7 +127,7 @@ function borrar(inputId,imgId){
 							else{
 								$(imgId).attr("src", "../images/camera.png");
 							}
-							$("#imgactual").attr("src", "/"+res);
+							$(imgAct).attr("src", "/"+res);
 						}
 						else{
 							$(imgId).attr("src", "/uploads-temp/"+res);
