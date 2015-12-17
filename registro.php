@@ -270,7 +270,7 @@ function validar_tienda(formy)
 	return true;
 }
 
-function cargar_ciudad(menu,submenu){
+/*function cargar_ciudad(menu,submenu){
 	var dataString = 'buscar=10,edo='+menu+',ciu='+submenu;
 	$.ajax({
 		type: "POST",
@@ -278,9 +278,8 @@ function cargar_ciudad(menu,submenu){
 		data: dataString,
 		success: function(transport) {
 			$('#ciu').fadeIn(0).html(transport);
-/*			$('#ciu').update(transport.responseText);*/
 		}
-	});
+	});*/
 
 /*	new Ajax.Request("/admini/funciones_ajax.php?buscar=10&edo="+menu+"&ciu="+submenu,{
 	method: 'get',
@@ -455,7 +454,8 @@ while($categoria=mysql_fetch_array($sql_categoria)){
 	while($menu=mysql_fetch_array($sql_menu))
 	{
 	?>
-    <option value="<?=$menu["id"]?>"><?=$menu["nombre"]?>
+    <option value="<?=$menu["id"]?>">
+    <?=$menu["nombre"]?>
     </option>
     <?php 
 	}?>

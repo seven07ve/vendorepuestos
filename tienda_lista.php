@@ -7,9 +7,9 @@ $ver_tienda = mysql_query("SELECT * FROM tienda_virtual WHERE id='$id'");
 $vt = mysql_fetch_array($ver_tienda);
 $carpeta = limpiar_cadena($vt["razon_social"]);
 $carpeta_productos = $carpeta."/productos";
-if($vt["color_contenido"]!="") $color_contenido = "#".$vt["color_contenido"]; else $color_contenido = "#FFFFFF";
-if($vt["color_titulo"]!="") $color_titulo = "#".$vt["color_titulo"]; else $color_titulo = "#33333";
-if($vt["color_fondo"]!="") $color_fondo = "#".$vt["color_fondo"]; else $color_fondo = "#FFFFFF";
+if($vt["color_contenido"]!="") $color_contenido = $vt["color_contenido"]; else $color_contenido = "#FFFFFF";
+if($vt["color_titulo"]!="") $color_titulo = $vt["color_titulo"]; else $color_titulo = "#33333";
+if($vt["color_fondo"]!="") $color_fondo = $vt["color_fondo"]; else $color_fondo = "#FFFFFF";
 
 $_pagi_sql = "SELECT * FROM productos WHERE vence>= NOW() && usuario_tienda='2' && id_usuario_tienda='$id'";
 if($_GET["p"]!=0) $_pagi_sql.=" ORDER BY precio ASC"; else  $_pagi_sql.=" ORDER BY precio DESC";

@@ -35,7 +35,7 @@ if($_POST['editar']){
   $email_mantenimiento = $_POST["email_mantenimiento"];
   $pin = $_POST["pin"];
   
-  $update = "UPDATE tienda_virtual SET usuario='$usuario', clave='$contrasena', nombre_oficial='$nombre_oficial', telefono2='$telefono2', pin='$pin', id_estado='$id_estado', id_ciudad='$id_ciudad', direccion='$direccion', latitud='$latitud', longitud='$longitud', pagina_web='$pagina_web', facebook='$facebook', twitter='$twitter', email='$email', descripcion='$descripcion', horario='$horario',color_titulo='$color_titulo',color_fondo='$color_fondo', color_contenido='$color_contenido',persona_mantenimiento='$persona_mantenimiento',telefono_mantenimiento='$telefono_mantenimiento',email_mantenimiento='$email_mantenimiento' WHERE id='$id'";
+  $update = "UPDATE tienda_virtual SET usuario='$usuario', clave='$contrasena', nombre_oficial='$nombre_oficial', telefono2='$telefono2', id_estado='$id_estado', id_ciudad='$id_ciudad', direccion='$direccion', latitud='$latitud', longitud='$longitud', pagina_web='$pagina_web', facebook='$facebook', twitter='$twitter', email='$email', descripcion='$descripcion', horario='$horario',color_titulo='$color_titulo',color_fondo='$color_fondo', color_contenido='$color_contenido',persona_mantenimiento='$persona_mantenimiento',telefono_mantenimiento='$telefono_mantenimiento',email_mantenimiento='$email_mantenimiento' WHERE id='$id'";
   $actualizar=mysql_query($update);
   //crear carpeta 
 /*  $carpeta = limpiar_cadena($razon_social);
@@ -156,24 +156,7 @@ function validar(formy)
   }
   return true;
 }
-function cargar_ciudad(menu,submenu){
-/*  new Ajax.Request("/admini/funciones_ajax.php?buscar=10&edo="+menu+"&ciu="+submenu,{
-  method: 'get',
-  onSuccess: function(transport) {
-    $('ciu').update(transport.responseText);
-  }
-  });*/
-  var dataString = 'buscar=10,edo='+menu+',ciu='+submenu;
-  $.ajax({
-    type: "POST",
-    url: 'http://vendorepuestos.com.ve/admini/funciones_ajax.php',
-    data: dataString,
-    success: function(transport) {
-      $('#ciu').fadeIn(0).html(transport);
-/*      $('#ciu').update(transport.responseText);*/
-    }
-  });
-}
+
 /*function popUp(URL) {
 day = new Date();
 id = day.getTime();
@@ -381,13 +364,14 @@ function cambiar(elemId){
             </td>
         </tr>
         <tr>
-          <td class="desc">Nombre de la TR:</td>
+          <td class="desc">Nombre de la TIENDAREPUESTOS:</td>
           <td colspan="2" class="campo">
-            <input name="nombre_oficial" type="text" class="form" value="<?=$resul["nombre_oficial"];?>" size="50" maxlength="35" /></td>
+            <input id="nombre_oficial" name="nombre_oficial" type="text" class="form" value="<?=$resul["nombre_oficial"];?>" size="50" maxlength="35" autocomplete="off" /></td>
         </tr>
-
+        <tr><td colspan="4" align="center"><div id="comprobar_nombre"></div></td></tr>
         <tr>
-          <td class="desc">RIF:</td>
+        <tr>
+          <td class="desc">Documento de Identidad/RIF:</td>
           <td colspan="2" class="blue">
             <?=$resul["rif"];?></td>
         </tr>
@@ -401,23 +385,22 @@ function cambiar(elemId){
           <td colspan="2" class="campo">
             <input name="telefono2" type="text" class="form" size="50" value="<?=$resul["telefono2"];?>" /></td>
         </tr>
-        <tr>
-          <td class="desc">Pin BB:</td>
-          <td colspan="2" class="campo">
-            <input name="pin" type="text" class="form" size="50" value="<?=$resul["pin"];?>"/></td>
-        </tr>
+<!--         <tr>
+  <td class="desc">Pin BB:</td>
+  <td colspan="2" class="campo">
+    <input name="pin" type="text" class="form" size="50" value="<?=$resul["pin"];?>"/></td>
+</tr> -->
         <tr>
           <td class="desc">Estado:</td>
           <td colspan="2" class="campo">
-            <select class="form" name="id_estado" onChange="cargar_ciudad(this.value,0);">
+            <select id="id_estado" class="form" name="id_estado">
               <option value="0">Seleccione</option>
-              <?php 
+  <?php 
   $sql_menu=mysql_query("SELECT * FROM estado ORDER BY nombre ASC");
   while($menu=mysql_fetch_array($sql_menu))
   {
   ?>
-              <option value="<?=$menu["id"]?>
-                "
+              <option value="<?=$menu["id"]?>"
                 <? if($menu["id"]==$resul["id_estado"]){?>
                 selected="selected"
                 <? }?>
@@ -432,6 +415,19 @@ function cambiar(elemId){
           <td colspan="2" class="campo" id="ciu">
             <select class="form" name="id_ciudad">
               <option value="0">Seleccione</option>
+  <?php 
+  $sql_menu=mysql_query("SELECT * FROM ciudad ORDER BY nombre ASC");
+  while($menu=mysql_fetch_array($sql_menu))
+  {
+  ?>
+              <option value="<?=$menu["id"]?>"
+                <? if($menu["id"]==$resul["id_ciudad"]){?>
+                selected="selected"
+                <? }?>
+                >
+                <?=$menu["nombre"]?></option>
+              <?php 
+  }?>
             </select>
           </td>
         </tr>
@@ -520,8 +516,10 @@ function cambiar(elemId){
         <tr>
           <td bgcolor="#e1e1e1" class="desc">Usuario:</td>
           <td colspan="2" bgcolor="#e1e1e1" class="campo">
-            <input name="usuario" type="text" class="form" size="50" value="<?=$resul["usuario"];?>" /></td>
+            <input id="usuario" name="usuario" type="text" class="form" size="50" autocomplete="off" value="<?=$resul["usuario"];?>" /></td>
         </tr>
+        <tr><td colspan="4" align="center"><div id="comprobar_usuario"></div></td></tr>
+        <tr>
         <tr>
           <td bgcolor="#e1e1e1" class="desc">Contrase&ntilde;a:</td>
           <td colspan="2" bgcolor="#e1e1e1" class="campo">
