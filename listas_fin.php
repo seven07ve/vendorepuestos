@@ -22,12 +22,20 @@ if (empty($_POST['busqueda'])){
     $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence < '".date("Y-m-j")."' ORDER BY precio DESC";
   include("paginar4.inc.php");
   }
-   elseif ($_GET['ord'] == 'visitas'){
+   elseif ($_GET['ord'] == 'menosvisitas'){
+    $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence < '".date("Y-m-j")."' ORDER BY visitas ASC";
+  include("paginar4.inc.php");
+  }
+   elseif ($_GET['ord'] == 'masvisitas'){
     $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence < '".date("Y-m-j")."' ORDER BY visitas DESC";
   include("paginar4.inc.php");
   }
-  elseif ($_GET['ord'] == 'vence'){
+  elseif ($_GET['ord'] == 'antiguos'){
     $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence < '".date("Y-m-j")."' ORDER BY vence ASC";
+  include("paginar4.inc.php");
+  }
+  elseif ($_GET['ord'] == 'recientes'){
+    $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence < '".date("Y-m-j")."' ORDER BY vence DESC";
   include("paginar4.inc.php");
   }
   else{
@@ -126,8 +134,10 @@ if (!empty($_POST['busqueda'])){
         <option selected>seleccione</option>
           <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/min">Menor precio</option>
           <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/max">Mayor precio</option>
-          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/visitas">Visitas</option>
-          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/vence">Vencimiento</option>
+          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/menosvisitas">Menos Visitas</option>
+          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/masvisitas">M&aacute;s Visitas</option>
+          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/antiguos">Antiguos</option>
+          <option value="/articulos_finalizado/<?=limpiar_cadena($nombretr)?>/1/recientes">Recientes</option>
       </select>
     </form>
     </td>

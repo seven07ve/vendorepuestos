@@ -137,8 +137,10 @@ if (!empty($_POST['busqueda'])){
         <option selected>seleccione</option>
           <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/min">Menor precio</option>
           <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/max">Mayor precio</option>
-          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/visitas">Visitas</option>
-          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/vence">Vencimiento</option>
+          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/menosvisitas">Menos Visitas</option>
+          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/masvisitas">M&aacute;s Visitas</option>
+          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/antiguos">Antiguos</option>
+          <option value="/articulos_activo/<?=limpiar_cadena($nombretr)?>/1/recientes">Recientes</option>
       </select>
     </form>
     </td>
