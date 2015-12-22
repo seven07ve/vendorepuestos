@@ -2,26 +2,32 @@
 include("conexion.php");
 session_start();
 include("funciones.php");
-//id de la categoria
 $idc=$_GET["idc"];
-//id del menu
 $idm=$_GET["idm"];
-//id del sub-menu
 $idsm=$_GET["idsm"];
 
 if($_GET["ide"]!=0)
 {
 	$busedo = "&& id_estado='".$_GET["ide"]."'";
 }
+if ($_GET["ord"] == "min"){
+  $orden = "precio ASC";
+}
+elseif ($_GET["ord"] == "max"){
+  $orden = "precio DESC";
+}
+else{
+  $orden = "vence ASC";
+}
 
 if($idsm!=0)
 { 
 	$ver_submenu = mysql_query("SELECT * FROM submenu2 WHERE id_submenu='".$idsm."' ORDER BY orden ASC");
-	$_pagi_sql= "SELECT * FROM productos WHERE id_categoria='$idc' && id_menu='$idm' && id_submenu='$idsm' && vence>= NOW() $busedo ORDER BY vence ASC";
+	$_pagi_sql= "SELECT * FROM productos WHERE id_categoria='$idc' && id_menu='$idm' && id_submenu='$idsm' && vence>= NOW() $busedo ORDER BY $orden";
 } 
 else
 { 
-	$_pagi_sql= "SELECT * FROM productos WHERE id_categoria='$idc' && id_menu='$idm' && vence>= NOW() $busedo ORDER BY vence ASC";
+	$_pagi_sql= "SELECT * FROM productos WHERE id_categoria='$idc' && id_menu='$idm' && vence>= NOW() $busedo ORDER BY  $orden";
 	//si tiene submenu
 	$ver_submenu = mysql_query("SELECT * FROM submenu WHERE id_menu='".$idm."' ORDER BY orden ASC");
 }
@@ -63,14 +69,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td valign="top">
+    <!-- Breadcrumb -->
       <div class="titulo_ruta" style="height:30px;">
       <a href="/inicio/" class="titulo_ruta">vendorepuestos.com.ve</a> > 
       <a href="/vista_nivel2/<?php echo limpiar_cadena(cual_categoria($idc))?>/<?php echo $idc?>/" class="titulo_ruta"><?php echo cual_categoria($idc);?></a> > 
-      <a href="/vista_nivel3/<?php echo limpiar_cadena(cual_menu($idm))?>/<?php echo $idc?>/<?php echo $idm?>/0/0/1/" class="titulo_ruta"><?php echo cual_menu($idm);?></a> 
-      <?php if($idsm!=0){ echo " > ";?>
-        <a href="/vista_nivel3/<?php echo limpiar_cadena(cual_submenu($idsm))?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/" class="titulo_ruta"><?php echo cual_submenu($idsm)?></a>
-      <?php }?>
-      </div>
+      <a href="/vista_nivel3/<?php echo limpiar_cadena(cual_menu($idm))?>/<?php echo $idc?>/<?php echo $idm?>/0/0/1/" class="titulo_ruta"><?php echo cual_menu($idm);?></a>
+       <?php if($idsm!=0){ echo " > ";?> 
+          <a href="/vista_nivel3/<?php echo limpiar_cadena(cual_submenu($idsm))?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/" class="titulo_ruta"><?php echo cual_submenu($idsm)?></a>
+       <?php }?>
+       </div>
       <table width="960" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td rowspan="2" valign="top">
@@ -143,17 +150,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <form id="form2" name="form2" method="post" action="" style="width:150px; display:inline;">
                   <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" class="form">
                     <option selected>seleccione</option>
-                    <?php
-                      if ($idsm == 0){
-                        $nombre_dir = limpiar_cadena(cual_menu($idm));
-                      }
-                      else{
-                        $nombre_dir = limpiar_cadena(cual_submenu($idsm));
-                      }
-
-                    ?>
-                    <option value="/vista_nivel3_ord/<?php echo $nombre_dir ?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/min">Menor precio</option>
-                    <option value="/vista_nivel3_ord/<?php echo $nombre_dir ?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/max">Mayor precio</option>
+                    <option value="/vista_nivel3_ord/<?php echo limpiar_cadena(cual_submenu($idsm))?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/min">Menor precio</option>
+                    <option value="/vista_nivel3_ord/<?php echo limpiar_cadena(cual_submenu($idsm))?>/<?php echo $idc?>/<?php echo $idm?>/<?php echo $idsm?>/0/1/max">Mayor precio</option>
                   </select>
                 </form>
               </td>

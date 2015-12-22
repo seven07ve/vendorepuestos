@@ -49,4 +49,5 @@ RewriteRule ^vista_nivel2/([A-Za-z0-9_-]+)/([0-9]+) /nivel_2.php?ncat=$1&idc=$2
 RewriteRule ^vista_nivel2_full/([A-Za-z0-9_-]+)/([0-9]+) /nivel_2_full.php?ncat=$1&idc=$2
 RewriteRule ^vista_nivel2_detalle/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_2_plus.php?ncat=$1&idc=$2&idm=$3&idsm=$4
 RewriteRule ^vista_nivel3/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_3.php?ncat=$1&idc=$2&idm=$3&idsm=$4&ide=$5&pg=$6
+RewriteRule ^vista_nivel3_ord/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([A-Za-z0-9_-]+) /nivel_precio_3.php?ncat=$1&idc=$2&idm=$3&idsm=$4&ide=$5&pg=$6&ord=$7
 RewriteRule ^vista_nivel4/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /nivel_4.php?ncat=$1&idc=$2&idm=$3&idsm=$4&idssm=$5&pg=$6

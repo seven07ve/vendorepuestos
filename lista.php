@@ -21,13 +21,11 @@ if($_GET['sw']=='1'){
 if (empty($_POST['busqueda'])){
   $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence>=NOW() ORDER BY fecha_publicacion DESC";
   include("paginar4.inc.php");
-
 }
 else{
-  //echo "hola".$_POST["busqueda"];
   $palabra = $_POST['palabra'];
-$_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence>=NOW() && (descripcion LIKE '%$palabra%' OR titulo LIKE '%$palabra%' OR subtitulo LIKE '%$palabra%' OR id='$palabra') ORDER BY fecha_publicacion DESC";
-include("paginar4.inc.php");
+  $_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence>=NOW() && (descripcion LIKE '%$palabra%' OR titulo LIKE '%$palabra%' OR subtitulo LIKE '%$palabra%' OR id='$palabra') ORDER BY fecha_publicacion DESC";
+  include("paginar4.inc.php");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
