@@ -1,10 +1,6 @@
 @font-face {
-/* font-family: "sofia";
-src: url("https://vendorepuestos.com.ve/sofia.ttf");
-src: url("http://vendorepuestos.com.ve/sofia.ttf"); */
-/* <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 font-family: "Roboto";
-src: url("https://fonts.googleapis.com/css?family=Roboto");
 }
 body {
 	font-family: "Roboto condensed", sans-serif;
@@ -121,13 +117,13 @@ A:hover
 	font-size:15px;
 }
 .blue {
-	color: #69A02A;
+	color: #204387;
 	text-decoration: none; font-weight:bold;
 	font-size:15px;
 }
 
 .green {
-	color: #2617BC;
+	color: #69A02A;
 	text-decoration: none; font-weight:bold;
 	font-size:15px;
 }
@@ -571,8 +567,25 @@ ul.error_list{list-style:none;padding:0;color:#EF363B}
   }
 }
 /*-------------------> login -------------------*/
+#form_login{
+	text-align: center;
+}
+#form_login img{
+	line-height:36px;
+	vertical-align: bottom;
+	padding-top: 40px;
+}
 #ingreso{
+	color: #204387;
+	width: 345px;
 	font-size: 18px;
+	text-align:center;
+	margin: 10px auto 0px auto;
+	padding:5px 0px;
+	/* border-radius: 8px; */
+	border-bottom: 2px solid #204387;
+	line-height: 25px;
+	/* background-color: #204387; */
 }
 
 .login-user{
@@ -591,14 +604,15 @@ ul.error_list{list-style:none;padding:0;color:#EF363B}
 	font-family: "Roboto condensed";
 	font-size: 16px;
 	font-weight: bold;
-	color: #69A02A;
+	color: #FFF;
+	background-color: #204387;
 	padding: 3px 14px;
-	border: solid 1px #D3D3D3;
+	border: solid 1px #0F2D66;
 	border-radius: 8px;
 }
 .login-button:hover{
 	border-color: #D3D3D3;
-	box-shadow: #59CD59 0px 0px 4px;
+	box-shadow: #204387 0px 0px 4px;
 	outline: 0;
 	opacity: .8;
 }

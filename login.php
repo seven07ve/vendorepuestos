@@ -68,61 +68,61 @@ function validar_login(form_login)
     <td colspan="2" valign="top"><table width="700" border="0" align="center" cellpadding="0" cellspacing="6" style="border-radius: 10px;border: 1px solid #D3D3D3;">
         <tr>
           <td class="tituc"> 
-          <form id="form_login" name="form_login" method="post" action="/iniciar_sesion/" onSubmit="return validar_login(this);">
-          <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td><span class="blue" id="ingreso">Entrar a Mi TIENDAREPUESTOS </span><br /><br />
-              <span class="blue"></span><br />
-              <img src="/imagenes/ico-user.jpg" alt="" style="line-height:36px; vertical-align: bottom;" /><input type="text" name="login" class="formt2 login-user" placeholder=" Usuario"/></td>
-            </tr>
-            <tr>
-              <td><br /><br />
-                <img src="/imagenes/ico-pass.jpg" alt="" style="line-height:36px; vertical-align: bottom;" /><input type="password" name="clave" class="formt2 login-user"  placeholder=" Contrase&ntilde;a"/>
-
-              </td>
-            </tr>
-            <tr>
-              <td>
-<div style="text-align:center">
-  <input type="hidden" name="usuario_tienda" value="2" />
-                <input type="hidden" name="act" value="login" />
-                <br><br>
-                <input type="submit" name="submit" id="submit" value="Ingresar" class="login-button">
-                <br><br>
-                <a href="/recuperar_datos/" class="blue">&iquest;Olvidaste tu Contrase&ntilde;a?</a>
-                <!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_send.jpg" /> -->
-             </form> </div>
-              </td>
-            </tr>
-          </table>
-
+	          <form id="form_login" name="form_login" method="post" action="/iniciar_sesion/" onSubmit="return validar_login(this);">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<div class="blue" id="ingreso">Entrar a Mi TIENDAREPUESTOS </div>
+							<img src="/imagenes/ico-user.jpg" alt="" /><input type="text" name="login" class="formt2 login-user" placeholder=" Usuario"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="/imagenes/ico-pass.jpg" alt="" /><input type="password" name="clave" class="formt2 login-user"  placeholder=" Contrase&ntilde;a"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="text-align:center">
+								<input type="hidden" name="usuario_tienda" value="2" />
+								<input type="hidden" name="act" value="login" />
+								<br><br>
+								<input type="submit" name="submit" id="submit" value="Ingresar" class="login-button">
+								<br><br>
+								<a href="/recuperar_datos/" class="blue">&iquest;Olvidaste tu Contrase&ntilde;a?</a>
+								<!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_send.jpg" /> -->
+							</div>
+						</td>
+					</tr>
+	          		</table>
+	             </form>
           </td>
           <td width="1" rowspan="4" valign="top" bgcolor="#D3D3D3"></td>
-          <td width="300" rowspan="4" align="center" valign="middle"><script language='JavaScript' type='text/javascript' src='http://vendorepuestos.com.ve/publicidad/adx.js'></script>
-<script language='JavaScript' type='text/javascript'>
-<!--
-   if (!document.phpAds_used) document.phpAds_used = ',';
-   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
-   
-   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
-   document.write ("http://vendorepuestos.com.ve/publicidad/adjs.php?n=" + phpAds_random);
-   document.write ("&amp;what=zone:7");
-   document.write ("&amp;exclude=" + document.phpAds_used);
-   if (document.referrer)
-      document.write ("&amp;referer=" + escape(document.referrer));
-   document.write ("'><" + "/script>");
-//-->
-</script><noscript><a href='http://vendorepuestos.com.ve/publicidad/adclick.php?n=aba8c689' target='_blank'><img src='http://vendorepuestos.com.ve/publicidad/adview.php?what=zone:7&amp;n=aba8c689' border='0' alt=''></a></noscript></td>
-        </tr>
-        <tr>
-          <td class="tituc">&nbsp;</td>
+          <td width="300" rowspan="4" align="center" valign="middle">
+          <script language='JavaScript' type='text/javascript' src='http://vendorepuestos.com.ve/publicidad/adx.js'></script>
+		<script language='JavaScript' type='text/javascript'>
+		<!--
+		   if (!document.phpAds_used) document.phpAds_used = ',';
+		   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+		   
+		   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+		   document.write ("http://vendorepuestos.com.ve/publicidad/adjs.php?n=" + phpAds_random);
+		   document.write ("&amp;what=zone:7");
+		   document.write ("&amp;exclude=" + document.phpAds_used);
+		   if (document.referrer)
+		      document.write ("&amp;referer=" + escape(document.referrer));
+		   document.write ("'><" + "/script>");
+		//-->
+		</script>
+		<noscript><a href='http://vendorepuestos.com.ve/publicidad/adclick.php?n=aba8c689' target='_blank'><img src='http://vendorepuestos.com.ve/publicidad/adview.php?what=zone:7&amp;n=aba8c689' border='0' alt=''></a></noscript>
+		</td>
         </tr>
         <tr>
           <td class="tituc">
           <form name="form_reg" method="post" action="/registroTR/">
           <input name="usuario_tienda" type="hidden" value="2"/>
           <input type="hidden" name="paso" value="1" />
-          <div align="right">
+          <div align="center">
             <a href="/registroTR/" class="blue">¿Deseas una TIENDAREPUESTOS?</a><br />
           </div>
           <!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_inscribete.jpg" /><br />-->
