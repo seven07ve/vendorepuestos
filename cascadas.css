@@ -596,7 +596,7 @@ ul.error_list{list-style:none;padding:0;color:#EF363B}
 }
 .login-user:focus{
 	border-color: #D3D3D3;
-	box-shadow: #59CD59 0px 0px 4px;
+	box-shadow: #204387 0px 0px 4px;
 	outline: 0;
 }
 
