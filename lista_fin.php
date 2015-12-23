@@ -156,10 +156,10 @@ if (!empty($_POST['busqueda'])){
     <td valign="top" colspan="3"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#e1e1e1">
       <form name="form_pag" action="" method="post">
         <tr>
-          <td width="100" class="pag">P&aacute;g <?=$_pagi_actual;?> de <?=$_pagi_totalPags?></td>
+          <td width="200" class="pag">P&aacute;g <?=$_pagi_actual;?> de <?=$_pagi_totalPags?></td>
           <td align="center" class="pag"><?=$_pagi_navegacion?></td>
-          <td width="80" align="right">Ir a la p&aacute;gina:&nbsp;</td>
-          <td width="40" align="right"><input name="pg" type="text" class="formpag" size="3" /></td>
+          <td width="100" align="right">Ir a la p&aacute;gina:&nbsp;</td>
+          <td width="50" align="right"><input name="pg" type="text" class="formpag" size="3" /></td>
           <td width="30" align="right"><input name="input" type="image" src="/imagenes/btn_ir.jpg" /></td>
           </tr>
         </form>
