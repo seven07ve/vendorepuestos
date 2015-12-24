@@ -39,7 +39,7 @@ RewriteRule ^datos_vendedor/([A-Za-z0-9_-]+) /datos.php?ntr=$1
 RewriteRule ^articulo_editar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_editar.php?ntr=$1&idp=$2
 RewriteRule ^articulo_eliminar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_eliminar.php?ntr=$1&idp=$2
 RewriteRule ^articulo/([A-Za-z0-9_-]+)/([0-9]+) /detalle.php?titulo=$1&idp=$2
-RewriteRule ^buscar/([0-9]+)/([A-Za-z0-9_-]+)/([a-z0-9_-]+)/([0-9]+) /resultado.php?categoria_buscar=$1&palabra=$2&ide=$3&pg=$4
+RewriteRule ^buscar/([0-9]+)/([A-Za-z0-9_-]+)/([a-z0-9_-]+)/([0-9]+)/([A-Za-z0-9_-]+) /resultado.php?categoria_buscar=$1&palabra=$2&ide=$3&pg=$4&ord=$5
 RewriteRule ^tr/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /tienda_lista.php?ntr=$1&id=$2&p=$3&f=$4&pg=$5
 RewriteRule ^tr_galeria/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+) /tienda.php?ntr=$1&id=$2&pg=$3
 RewriteRule ^tr_categoria/([A-Za-z0-9_-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+) /categorias_tienda.php?ntr=$1&id=$2&idm=$3&p=$4&$f=$5&pg=$6

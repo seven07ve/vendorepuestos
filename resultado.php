@@ -21,6 +21,15 @@ if($_GET["ide"]!=0)
 {
 	$busedo = "&& p.id_estado='".$_GET["ide"]."'";
 }
+if ($_GET["ord"] == "min"){
+  $orden = " ORDER BY precio ASC";
+}
+elseif ($_GET["ord"] == "max"){
+  $orden = " ORDER BY precio DESC";
+}
+else{
+  $orden = "";
+}
 
 if($categoria_buscar==0) 
 {
@@ -29,13 +38,16 @@ if($categoria_buscar==0)
 		$trozos=explode(" ",$palabra);
   		$numero=count($trozos);
   		if ($numero==1)
-			$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo";
+			$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo$orden";
 		else
-			$_pagi_sql="SELECT p. *, MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') AS puntuacion FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() AND MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') $busedo ORDER BY puntuacion DESC"; 
+			if ($_GET["ord"] == "0"){
+				$orden = " ORDER BY puntuacion DESC";
+			}
+			$_pagi_sql="SELECT p. *, MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') AS puntuacion FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() AND MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') $busedo$orden"; 
 	}
 	else
 	{
-		$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo";
+		$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
 	}
 }
 else
@@ -44,14 +56,25 @@ else
 	{
 		$trozos=explode(" ",$palabra);
 		$numero=count($trozos);
-		if ($numero==1)
-			$_pagi_sql="SELECT p. *, c.*  FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.id='$categoria_buscar' && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo) ORDER BY vence ASC";
-		else
-			$_pagi_sql="SELECT p. *, c.*, MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') AS puntuacion FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.id='$categoria_buscar' && MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra')) $busedo ORDER BY puntuacion DESC, vence ASC";
+		if ($numero==1){
+			if ($_GET["ord"] == "0"){
+				$orden = " ORDER BY vence ASC";
+			}
+			$_pagi_sql="SELECT p. *, c.*  FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.id='$categoria_buscar' && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo)$orden";
+		}
+		else{
+			if ($_GET["ord"] == "0"){
+				$orden = " ORDER BY puntuacion DESC, vence ASC";
+			}
+			$_pagi_sql="SELECT p. *, c.*, MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') AS puntuacion FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.id='$categoria_buscar' && MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra')) $busedo$orden";
+		}
 	}
 	else
 	{
-		$_pagi_sql="SELECT p. *, c.*  FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo ORDER BY vence ASC";
+		if ($_GET["ord"] == "0"){
+			$orden = " ORDER BY vence ASC";
+		}
+		$_pagi_sql="SELECT p. *, c.*  FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
 	}
 }
 include("paginar4.inc.php");
@@ -63,6 +86,12 @@ include("paginar4.inc.php");
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>.:: Vendorepuestos.com.ve ::.</title>
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+</script>
 </head>
 <body>
 <?php include("includes/header.php"); ?>
@@ -108,7 +137,16 @@ include("paginar4.inc.php");
     <td valign="top">
     <table width="700" border="0" align="left" cellpadding="3" cellspacing="0">
       <tr>
-        <td colspan="4" class="titulo_seccion"><span class="red"><?=$_pagi_totalReg;?></span> art&iacute;culo(s) encontrados para: <span class="negra"><?=$palabra;?></span></td>
+        <td colspan="2" class="titulo_seccion"><span class="red"><?=$_pagi_totalReg;?></span> art&iacute;culo(s) encontrados para: <span class="negra"><?=$palabra;?></span></td>
+              <td colspan="4"  class="titulo_seccion" style="text-align:right;">Ordenar por:
+                <form id="form2" name="form2" method="post" action="" style="width:150px; display:inline;">
+                  <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" class="form">
+                    <option selected>seleccione</option>
+                    <option value="/buscar/<?php echo $_POST["categoria_buscar"]?>/<?php echo $_POST["palabra"]?>/0/1/min">Menor precio</option>
+                    <option value="/buscar/<?php echo $_POST["categoria_buscar"]?>/<?php echo $_POST["palabra"]?>/0/1/max">Mayor precio</option>
+                  </select>
+                </form>
+              </td>
       </tr>
        <tr height="25" background="/imagenes/bg_botonera.jpg" class="menu">
          <td width="164" class="link">GALERIA</td>
