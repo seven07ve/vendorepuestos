@@ -6,12 +6,12 @@ function validar_buscar(forma)
 	{
 		cadena = cadena.replace(/À|Á|Â|Ã|Ä|Å|à|á|â|ã|ä|å|Ò|Ó|Ô|Õ|Ö|Ø|ò|ó|ô|õ|ö|ø|È|É|Ê|Ë|è|é|ê|ë|Ç|ç|Ì|Í|Î|Ï|ì|í|î|ï|Ù|Ú|Û|Ü|ù|ú|û|ü|ÿ|Ñ|ñ|\.|\/|\#/, '-');
 		cadena = cadena.replace(/ /gi, '-');
-		forma.action="/buscar/"+forma.categoria_buscar.value+"/"+cadena+"/0/1";
+		forma.action="/buscar/"+forma.categoria_buscar.value+"/"+cadena+"/0/1/0";
 		return true;
 	}
 	else
 	{
-		forma.action="/buscar/"+forma.categoria_buscar.value+"/todos/0/1";
+		forma.action="/buscar/"+forma.categoria_buscar.value+"/todos/0/1/0";
 		return true;
 	}
 }
@@ -48,7 +48,7 @@ function MM_showHideLayers() { //v9.0
           <option value="<?=$vc["id"]?>"><?=$vc["nombre"];?></option>
           <? }?>
         </select></td>
-        <td width="58%" align="right"><input name="palabra" type="text" class="formt"value="" /></td>
+        <td width="58%" align="right"><input name="palabra" type="text" class="formt" value="" /></td>
         <td width="9%"><input name="button" type="image" id="button" value="Submit" src="/imagenes/btn_busca_dere.jpg" /></td>
       </tr>
       </form>

@@ -7,9 +7,12 @@ if($_POST["categoria_buscar"])
 	$categoria_buscar = $_POST["categoria_buscar"];
 	$_SESSION["categoria_buscar"] =  $categoria_buscar;
 }
-if($_POST["palabra"])
-{
+if($_POST["palabra"]){
 	$palabra=$_POST["palabra"];
+	$_SESSION["palabra"] = $palabra;
+}
+else{
+	$palabra = "todos";
 	$_SESSION["palabra"] = $palabra;
 }
 $categoria_buscar = $_SESSION["categoria_buscar"];
@@ -33,27 +36,27 @@ else{
 
 if($categoria_buscar==0) 
 {
-	if($palabra!="todos")
-	{
+	if($palabra!="todos"){
 		$trozos=explode(" ",$palabra);
   		$numero=count($trozos);
-  		if ($numero==1)
-			$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo$orden";
-		else
+  		if ($numero==1){
+ 			$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo$orden";
+  		}
+		else{
 			if ($_GET["ord"] == "0"){
 				$orden = " ORDER BY puntuacion DESC";
 			}
 			$_pagi_sql="SELECT p. *, MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') AS puntuacion FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() AND MATCH(p.titulo,p.subtitulo,p.descripcion) AGAINST ('$palabra') $busedo$orden"; 
+		}
 	}
 	else
 	{
-		$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
+		echo $_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
 	}
 }
 else
 {
-	if($palabra!="todos")
-	{
+	if($palabra!="todos"){
 		$trozos=explode(" ",$palabra);
 		$numero=count($trozos);
 		if ($numero==1){
@@ -78,7 +81,6 @@ else
 	}
 }
 include("paginar4.inc.php");
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -142,8 +144,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <form id="form2" name="form2" method="post" action="" style="width:150px; display:inline;">
                   <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" class="form">
                     <option selected>seleccione</option>
-                    <option value="/buscar/<?php echo $_POST["categoria_buscar"]?>/<?php echo $_POST["palabra"]?>/0/1/min">Menor precio</option>
-                    <option value="/buscar/<?php echo $_POST["categoria_buscar"]?>/<?php echo $_POST["palabra"]?>/0/1/max">Mayor precio</option>
+                    <option value="/buscar/<?php echo $categoria_buscar ?>/<?php echo $palabra ?>/0/1/min">Menor precio</option>
+                    <option value="/buscar/<?php echo $categoria_buscar ?>/<?php echo $palabra ?>/0/1/max">Mayor precio</option>
                   </select>
                 </form>
               </td>

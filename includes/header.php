@@ -1,5 +1,4 @@
 <script language="javascript">
-
 function validar_buscar(forma)
 {
 	cadena = forma.palabra.value;
@@ -26,46 +25,73 @@ function MM_showHideLayers() { //v9.0
     obj.visibility=v; }
 }
 </script>
-<div id="top"><div id="t1"><img src="/imagenes/box_dere_top.png" width="6" height="21" /></div>
-<div id="t2"><a href="/vendeTR/">Vende tu Art&iacute;culo</a> | <a href="/tarifasTR/">Tarifas</a>  | <a href="/tiendarepuestos/all/1">Tiendarepuestos</a></div>
-<div id="t3"><img src="/imagenes/box_izq_top.png" width="6" height="21" /></div></div>
-<table width="960" border="0" align="center" cellpadding="0" cellspacing="0"><tr><td width="353" height="25" align="right"><table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="508" rowspan="2" align="center"><a href="/inicio/"><img src="/imagenes/img_logo.jpg" width="487" height="70" vspace="10" border="0" /></a></td>
-    <td width="99" rowspan="2">&nbsp;</td>
-    <td style="padding-right:15px" width="353" height="25" align="right" class="bluep"><?//=salutacion()?></td>
-  </tr>
-  <tr>
-    <td style="padding-right:15px;" ><table border="0" align="right" cellpadding="0" cellspacing="0">
-  <tr>
-    <td><div style="padding-top:3px;" class="corners"><!--<a href="#"><img src="/imagenes/btn_megusta.jpg" width="94" height="28" border="0" /></a>-->  <a href="http://twitter.com/#!/vendorepuestos" target="_blank"><img src="/imagenes/btn_twitter.jpg" width="27" height="28" border="0" /></a>  <a href="https://www.facebook.com/pages/vendorepuestos/" target="_blank"><img src="/imagenes/btn_face.jpg" border="0" /></a>  <a href="http://www.youtube.com/watch?v=S3WMoIznznI" target="_blank"><img src="/imagenes/btn_youtube.jpg" width="28" height="28" border="0" /></a>  <a href="http://www.vendorepuestos.blogspot.com/" target="_blank"><img src="/imagenes/btn_blog.jpg" alt="" width="28" height="28" border="0" /></a>  <!--<a href="#"><img src="/imagenes/btn_google.jpg" width="43" height="28" border="0" /></a>-->
-   
-</div></td>
-  </tr>
-</table></td>
-  </tr>
-  <tr>
-    <td height="35" colspan="3" background="/imagenes/bg_busca.jpg"><table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <form method="post" onsubmit="return validar_buscar(this);" name="form_bus" id="form_bus">
-      <tr>
-        <td width="33%" align="right"><select name="categoria_buscar" class="formt2">
-          <option value="0">Todas las categor&iacute;as...</option>
-          <? $ver_cat = mysql_query("SELECT * FROM categoria ORDER BY id"); while($vc=mysql_fetch_array($ver_cat)){?>
-          <option value="<?=$vc["id"]?>"><?=$vc["nombre"];?></option>
-          <? }?>
-        </select></td>
-        <td width="58%" align="right"><input name="palabra" type="text" class="formt" value="" /></td>
-        <td width="9%"><input name="button" type="image" id="button" value="Submit" src="/imagenes/btn_busca_dere.jpg" /></td>
-      </tr>
-      </form>
-    </table></td>
-  </tr>
-  <tr>
-    <td colspan="3"><img src="/imagenes/div_botonera.jpg" width="960" height="5" /></td>
-  </tr>
+<div id="top">
+	<div id="t1">
+		<img src="/imagenes/box_dere_top.png" width="6" height="21" />
+	</div>
+	<div id="t2">
+		<a href="/vendeTR/">Vende tu Art&iacute;culo</a> | <a href="/tarifasTR/">Tarifas</a>  | <a href="/tiendarepuestos/all/1">Tiendarepuestos</a>
+	</div>
+	<div id="t3">
+		<img src="/imagenes/box_izq_top.png" width="6" height="21" />
+	</div>
+</div>
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="353" height="25" align="right">
+			<table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="508" rowspan="2" align="center">
+					<a href="/inicio/"><img src="/imagenes/img_logo.jpg" width="487" height="70" vspace="10" border="0" /></a>
+				</td>
+				<td width="99" rowspan="2">&nbsp;</td>
+				<td style="padding-right:15px" width="353" height="25" align="right" class="bluep"><?php//=salutacion()?></td>
+			</tr>
+			<tr>
+				<td style="padding-right:15px;" >
+					<table border="0" align="right" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<div style="padding-top:3px;" class="corners"><!--<a href="#"><img src="/imagenes/btn_megusta.jpg" width="94" height="28" border="0" /></a>-->  
+								<a href="http://twitter.com/#!/vendorepuestos" target="_blank"><img src="/imagenes/btn_twitter.jpg" width="27" height="28" border="0" /></a>  <a href="https://www.facebook.com/pages/vendorepuestos/" target="_blank"><img src="/imagenes/btn_face.jpg" border="0" /></a>  <a href="http://www.youtube.com/watch?v=S3WMoIznznI" target="_blank"><img src="/imagenes/btn_youtube.jpg" width="28" height="28" border="0" /></a>  <a href="http://www.vendorepuestos.blogspot.com/" target="_blank"><img src="/imagenes/btn_blog.jpg" alt="" width="28" height="28" border="0" /></a>  <!--<a href="#"><img src="/imagenes/btn_google.jpg" width="43" height="28" border="0" /></a>-->
+							</div>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+	<tr>
+		<td height="35" colspan="3" background="/imagenes/bg_busca.jpg">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<form method="post" onsubmit="return validar_buscar(this);" name="form_bus" id="form_bus">
+				<tr>
+					<td width="33%" align="right"><select name="categoria_buscar" class="formt2">
+						<option value="0">Todas las categor&iacute;as...</option>
+						<?php 
+						$ver_cat = mysql_query("SELECT * FROM categoria ORDER BY id");
+							while($vc=mysql_fetch_array($ver_cat)){
+								echo '<option value="'.$vc["id"].'">'.$vc["nombre"].'</option>';
+						 	}
+						 ?>
+						</select>
+					</td>
+					<td width="58%" align="right">
+						<input name="palabra" type="text" class="formt" value="" />
+					</td>
+					<td width="9%">
+						<input name="button" type="image" id="button" value="Submit" src="/imagenes/btn_busca_dere.jpg" />
+					</td>
+				</tr>
+				</form>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3"><img src="/imagenes/div_botonera.jpg" width="960" height="5" /></td>
+	</tr>
   <tr>
           <td height="25" colspan="3" background="/imagenes/bg_botonera.jpg" class="menu"  ><!--onmouseout="MM_showHideLayers('submenuh','','hide')"-->
-    <? 
+    <?php 
 	$i= 0;
 	$ancho = array("-201","190","148","65","270","250");
 	$left = array("0","-8","85","160","190","325");
@@ -75,23 +101,23 @@ function MM_showHideLayers() { //v9.0
 		$i++;
 		if($vc["presentacion"]==2) $link = "_full"; else $link = "";
 		?>
-    	<div id="submenuh<?=$vc["id"]?>" style="background-color: #FFFFFF;  border-color: #CCCCCC; border-style: solid;   border-width: 1px;  margin-top: 15px; margin-left:<?=$left[$i]?>px; padding: 1px 1px 1px 10px;   position: absolute; visibility: hidden;" onmouseout="MM_showHideLayers('submenuh<?=$vc["id"]?>','','hide'); MM_showHideLayers('submenuh<?=$vc["id"]?>','','hide')">
-		<div  style=" border-color:#CCC; border-width:1px; border-style:solid; border-bottom-width:0px; position:absolute; background-color:#FFF; margin-top:-20px; width:<?=$ancho[$i]-10;?>px;  padding:2px; margin-left: <?=$left[$i]?>px;" onmouseover="MM_showHideLayers('submenuh<?=$vc["id"]?>','','show')">
-<a href="/vista_nivel2<?=$link?>/<?=limpiar_cadena($vc["nombre"])?>/<?=$vc["id"]?>/" onclick="MM_showHideLayers('submenuh<?=$vc["id"]?>','','show');" onmouseover="MM_showHideLayers('submenuh<?=$vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?=$vc["id"]?>','','hide')"><?=strtoupper($vc["nombre"]);?></a></div>
+    	<div id="submenuh<?php echo $vc["id"]?>" style="background-color: #FFFFFF;  border-color: #CCCCCC; border-style: solid;   border-width: 1px;  margin-top: 15px; margin-left:<?php echo $left[$i]?>px; padding: 1px 1px 1px 10px;   position: absolute; visibility: hidden;" onmouseout="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','hide'); MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','hide')">
+		<div  style=" border-color:#CCC; border-width:1px; border-style:solid; border-bottom-width:0px; position:absolute; background-color:#FFF; margin-top:-20px; width:<?php echo $ancho[$i]-10;?>px;  padding:2px; margin-left: <?php echo $left[$i]?>px;" onmouseover="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','show')">
+<a href="/vista_nivel2<?php echo $link?>/<?php echo limpiar_cadena($vc["nombre"])?>/<?php echo $vc["id"]?>/" onclick="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','show');" onmouseover="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','hide')"><?php echo strtoupper($vc["nombre"]);?></a></div>
 
-<table border="0" cellpadding="0" cellspacing="8" onmouseover="MM_showHideLayers('submenuh<?=$vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?=$vc["id"]?>','','hide')"><tbody><tr>
-<?
+<table border="0" cellpadding="0" cellspacing="8" onmouseover="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','hide')"><tbody><tr>
+<?php
 		$sw=0;
 		$ver_menu = mysql_query("SELECT * FROM menu WHERE id_categoria='".$vc["id"]."' ORDER BY orden ASC");
 		while($vm = mysql_fetch_array($ver_menu))
         {
 			$sw+=1;
 			if($sw!=3){?>
-        	<td><a href="/vista_nivel3/<?=limpiar_cadena($vm["nombre"])?>/<?=$vc["id"]?>/<?=$vm["id"]?>/0/0/1" class="bluep"><?=$vm["nombre"]?></a> (<?=cuantos_productos_categoria($vc["id"],$vm["id"],0,0);?>)</td>
-			<?
+        	<td><a href="/vista_nivel3/<?php echo limpiar_cadena($vm["nombre"])?>/<?php echo $vc["id"]?>/<?php echo $vm["id"]?>/0/0/1" class="bluep"><?php echo $vm["nombre"]?></a> (<?php echo cuantos_productos_categoria($vc["id"],$vm["id"],0,0);?>)</td>
+			<?php
 			}else{
 			?>
-       		<td><a href="/vista_nivel3/<?=limpiar_cadena($vm["nombre"])?>/<?=$vc["id"]?>/<?=$vm["id"]?>/0/0/1" class="bluep"><?=$vm["nombre"]?></a> (<?=cuantos_productos_categoria($vc["id"],$vm["id"],0,0);?>)</td></tr><?  
+       		<td><a href="/vista_nivel3/<?php echo limpiar_cadena($vm["nombre"])?>/<?php echo $vc["id"]?>/<?php echo $vm["id"]?>/0/0/1" class="bluep"><?php echo $vm["nombre"]?></a> (<?php echo cuantos_productos_categoria($vc["id"],$vm["id"],0,0);?>)</td></tr><?php  
 			$sw = 0;
 			}
 		}
@@ -99,7 +125,7 @@ function MM_showHideLayers() { //v9.0
         </tbody>
         </table>
        </div>
-	<div style="width:<?=$ancho[$i]?>px; float:left"><a href="/vista_nivel2<?=$link?>/<?=limpiar_cadena($vc["nombre"])?>/<?=$vc["id"]?>/" class="link"  onmouseover="MM_showHideLayers('submenuh<?=$vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?=$vc["id"]?>','','hide')"><?=strtoupper($vc["nombre"]);?></a> | </div>  <? }?></td>
+	<div style="width:<?php echo $ancho[$i]?>px; float:left"><a href="/vista_nivel2<?php echo $link?>/<?php echo limpiar_cadena($vc["nombre"])?>/<?php echo $vc["id"]?>/" class="link"  onmouseover="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','show')" onmouseout="MM_showHideLayers('submenuh<?php echo $vc["id"]?>','','hide')"><?php echo strtoupper($vc["nombre"]);?></a> | </div>  <?php }?></td>
   </tr>
   <tr>
     <td height="10" colspan="3" align="right" class="red"></td>
