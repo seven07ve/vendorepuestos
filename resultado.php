@@ -1,4 +1,4 @@
-<? 
+<?php
 include("conexion.php");
 session_start();
 include("funciones.php");
@@ -40,6 +40,9 @@ if($categoria_buscar==0)
 		$trozos=explode(" ",$palabra);
   		$numero=count($trozos);
   		if ($numero==1){
+		if ($_GET["ord"] == "0"){
+			$orden = " ORDER BY puntuacion DESC";
+		}
  			$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() && (c.nombre LIKE '%$palabra%' OR p.descripcion LIKE '%$palabra%' OR p.titulo LIKE '%$palabra%' OR p.subtitulo LIKE '%$palabra%' OR p.id='$palabra') $busedo$orden";
   		}
 		else{
@@ -51,7 +54,7 @@ if($categoria_buscar==0)
 	}
 	else
 	{
-		echo $_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
+		$_pagi_sql="SELECT p. * FROM productos p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.vence>= NOW() $busedo$orden";
 	}
 }
 else
@@ -117,7 +120,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   <tr>
     <td valign="top">
     <div class="titcat2">UBICACION</div>
-    <?=ubicacion_activas_busqueda($_GET["yy"],$palabra,$categoria_buscar);?>
+    <?php echo ubicacion_activas_busqueda($_GET["yy"],$palabra,$categoria_buscar);?>
     <div class="ft"><img src="/imagenes/degrade_amarillo.jpg" width="240" height="37" /></div>
     <div align="center"><script language='JavaScript' type='text/javascript' src='http://vendorepuestos.com.ve/publicidad/adx.js'></script>
 <script language='JavaScript' type='text/javascript'>
@@ -139,7 +142,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td valign="top">
     <table width="700" border="0" align="left" cellpadding="3" cellspacing="0">
       <tr>
-        <td colspan="2" class="titulo_seccion"><span class="red"><?=$_pagi_totalReg;?></span> art&iacute;culo(s) encontrados para: <span class="negra"><?=$palabra;?></span></td>
+        <td colspan="2" class="titulo_seccion"><span class="red"><?php echo $_pagi_totalReg;?></span> art&iacute;culo(s) encontrados para: <span class="negra"><?php echo $palabra;?></span></td>
               <td colspan="4"  class="titulo_seccion" style="text-align:right;">Ordenar por:
                 <form id="form2" name="form2" method="post" action="" style="width:150px; display:inline;">
                   <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" class="form">
@@ -160,7 +163,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
          <td colspan="4" class="link" height="10"></td>
         </tr>
       </table>
-	<?
+	<?php
 	while($b = mysql_fetch_array($_pagi_result))
 	{
 			if($b["usuario_tienda"]==1) $carpeta_productos = "productos";
@@ -168,25 +171,25 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     ?>
     <div style="width:685px; height:120px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px; clear:both;">
 	  <div style="width:480px; float:left; margin:0 5px 0 0">
-            <a href="/articulo/<?=limpiar_cadena($b["titulo"])?>/<?=$b["id"]?>"><img src="/<?=$carpeta_productos?>/<?=$b["foto1"]?>" width="145" height="108" hspace="5" vspace="5" border="0" align="left" /></a>
-            <span class="blue"><a href="/articulo/<?=limpiar_cadena($b["titulo"])?>/<?=$b["id"]?>" class="blue"><?=$b["titulo"]?></a></span><br />
-			<?=$b["subtitulo"]?><br />
-            <span class="bluep"><a href="/articulo/<?=limpiar_cadena($b["titulo"])?>/<?=$b["id"]?>" class="bluep">Art&iacute;culo # <?=numero_articulo($b["id"]);?></a></span><br />
-			<? if($b["usuario_tienda"]=="2"){?>visite <?=cual_usuario_resultado($b["id_usuario_tienda"],2)?><br /><a href="/tr/<?=limpiar_cadena(cual_usuario($b["id_usuario_tienda"],2))?>/<?=$b["id_usuario_tienda"]?>/0/0/1"><img src="/imagenes/icon_tr.jpg" width="33" height="25" border="0" /></a><? }?><br />
+            <a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>"><img src="/<?php echo $carpeta_productos?>/<?php echo $b["foto1"]?>" width="145" height="108" hspace="5" vspace="5" border="0" align="left" /></a>
+            <span class="blue"><a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>" class="blue"><?php echo $b["titulo"]?></a></span><br />
+			<?php echo $b["subtitulo"]?><br />
+            <span class="bluep"><a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>" class="bluep">Art&iacute;culo # <?php echo numero_articulo($b["id"]);?></a></span><br />
+			<?php if($b["usuario_tienda"]=="2"){?>visite <?php echo cual_usuario_resultado($b["id_usuario_tienda"],2)?><br /><a href="/tr/<?php echo limpiar_cadena(cual_usuario($b["id_usuario_tienda"],2))?>/<?php echo $b["id_usuario_tienda"]?>/0/0/1"><img src="/imagenes/icon_tr.jpg" width="33" height="25" border="0" /></a><?php }?><br />
             </div>
-			<div class="red" style="width:100px; float:left;">Bs. <?=$b["precio"]?></div>
-            <div class="gris" style="width:100px; float:left;"><?=date("d-m-Y",strtotime($b["vence"]))?><br /> 
-            <?=cual_estado($b["id_estado"])?></div>
+			<div class="red" style="width:100px; float:left;">Bs. <?php echo $b["precio"]?></div>
+            <div class="gris" style="width:100px; float:left;"><?php echo date("d-m-Y",strtotime($b["vence"]))?><br /> 
+            <?php echo cual_estado($b["id_estado"])?></div>
             </div>
-    	<? }?></td>
+    	<?php }?></td>
   </tr>
   <tr>
     <td colspan="2">
     <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#e1e1e1">
   	<form name="form_pag" action="" method="post">
     <tr>
-    <td width="200" class="pag">P&aacute;g <?=$_pagi_actual;?> de <?=$_pagi_totalPags?></td>
-    <td align="center" class="pag"><?=$_pagi_navegacion?></td>
+    <td width="200" class="pag">P&aacute;g <?php echo $_pagi_actual;?> de <?php echo $_pagi_totalPags?></td>
+    <td align="center" class="pag"><?php echo $_pagi_navegacion?></td>
     <td width="100" align="right">Ir a la p&aacute;gina:&nbsp;</td>
     <td width="50" align="right"><input name="pg" type="text" class="formpag" size="3" /></td>
     <td width="30" align="right"><input name="input" type="image" src="/imagenes/btn_ir.jpg" /></td>
