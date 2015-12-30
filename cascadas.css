@@ -617,3 +617,11 @@ ul.error_list{list-style:none;padding:0;color:#EF363B}
 	outline: 0;
 	opacity: .8;
 }
+
+.mini-loading{
+  width:20px;
+  height:20px;
+  vertical-align:middle;
+  margin:0px 5px;
+  display: none;
+}

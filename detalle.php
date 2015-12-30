@@ -240,9 +240,9 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
 					<form action="" method="post" name="form-consulta" id="form-consulta">
 						<input id="email" name="email" type="text" class="form" size="50" autocomplete="off" placeholder="Correo Electrónico" />
 						<span id="msjmail"></span>
-						<textarea name="consulta" id="consulta" class="form" style="width:90%; height:60px; margin-top:5px;" placeholder="Preguntale al vendedor"></textarea>
-						<span id="msjconsulta"></span><br />
-						<input type="button" class="form" id="preguntar" name="preguntar" value="Preguntar" style="margin-top:5px;"/>	No use lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu pregunta.
+						<textarea name="consulta" id="consulta" class="form" style="width:90%; height:60px; margin-top:5px; margin-right:7%;" placeholder="Preguntale al vendedor"></textarea>
+						<span id="msjconsulta"></span>
+						<input type="button" class="form" id="preguntar" name="preguntar" value="Preguntar" style="margin-top:5px;"/><img src="/imagenes/cargando3.gif" id="mini-cargando" class="mini-loading" /><span style="margin-left:5px;">No use lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu pregunta.</span>
 					</form>
 					
 				</div>
