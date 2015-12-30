@@ -7,6 +7,10 @@ if($_POST["categoria_buscar"])
 	$categoria_buscar = $_POST["categoria_buscar"];
 	$_SESSION["categoria_buscar"] =  $categoria_buscar;
 }
+else{
+	$categoria_buscar = 0;
+ 	$_SESSION["categoria_buscar"] =  $categoria_buscar;
+}
 if($_POST["palabra"]){
 	$palabra=$_POST["palabra"];
 	$_SESSION["palabra"] = $palabra;
@@ -24,6 +28,7 @@ if($_GET["ide"]!=0)
 {
 	$busedo = "&& p.id_estado='".$_GET["ide"]."'";
 }
+
 if ($_GET["ord"] == "min"){
   $orden = " ORDER BY precio ASC";
 }

@@ -9,14 +9,13 @@ $visitas = mysql_query("UPDATE productos SET visitas=visitas+1 WHERE id='$idp'")
 $ultima_visitas = mysql_query("UPDATE productos SET ultima_visita=CURRENT_TIMESTAMP() WHERE id='$idp'");
 
 $ver_detalle_producto = mysql_query("SELECT * FROM productos WHERE id='$idp'");
-if(mysql_num_rows($ver_detalle_producto)==0)
-{?>
-<script language="javascript">alert("Publicacion No existe"); window.location="/inicio/";</script>
-<?php }
+
+if(mysql_num_rows($ver_detalle_producto)==0){
+	echo '<script language="javascript">alert("Publicacion No existe"); window.location="/inicio/";</script>';
+}
 $detail = mysql_fetch_array($ver_detalle_producto);
 
-if($detail["usuario_tienda"]==1)
-{
+if($detail["usuario_tienda"]==1){
 	$carpeta_productos = "productos";
 	
 	$ver_datos_vendedor = mysql_query("SELECT * FROM usuario WHERE id='".$detail["id_usuario_tienda"]."'");
@@ -29,8 +28,7 @@ if($detail["usuario_tienda"]==1)
 	$horario_vendedor = $vdv["horario"];
 	$certificado = $vdv["certificado"];
 }
-elseif($detail["usuario_tienda"]==2)
-{
+elseif($detail["usuario_tienda"]==2){
 	$carpeta_productos = cual_nombre_carpeta($detail["id_usuario_tienda"])."/productos";
 	$ver_datos_vendedor = mysql_query("SELECT * FROM tienda_virtual WHERE id='".$detail["id_usuario_tienda"]."'");
 	$vdv = mysql_fetch_array($ver_datos_vendedor);
@@ -42,7 +40,6 @@ elseif($detail["usuario_tienda"]==2)
 	$horario_vendedor = $vdv["horario"];
 	$nombretr = $vdv["nombre_oficial"];
 }
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,8 +59,10 @@ visibility:hidden;
 }
 </style>
 <!--carrusel-->
-<script type="text/javascript" src="/lib/jquery-1.4.2.min.js"></script>
+<!-- <script type="text/javascript" src="/lib/jquery-1.4.2.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="/lib/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="/js/preguntas.js"></script>
 <link rel="stylesheet" type="text/css" href="/lib/skin.css" />
 <script type="text/javascript">
 
@@ -200,7 +199,7 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
             <td align="center"><span class="titulo_categoria" style="clear:both;">Visitas</span></td>
           </tr>
           <tr>
-            <td height="23" align="center" class="red" style="background-image:url(//imagenes/box_numero_detalle.jpg); background-repeat:no-repeat;"><?=$detail["visitas"];?></td>
+            <td height="23" align="center" class="red" style="background-image:url(/imagenes/box_numero_detalle.jpg); background-repeat:no-repeat;"><?=$detail["visitas"];?></td>
           </tr>
           <tr>
             <td height="10" align="center">&nbsp;</td>
@@ -212,14 +211,15 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
         	  <td colspan="2"><div style="width:960px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">
         	    <table width="100%" border="0" cellpadding="0" cellspacing="0">
         	      <tr>
-        	        <td width="4%"><img src="/imagenes/icono_seguro.jpg" width="30" height="36" hspace="5" vspace="5" /></td>
+        	        <td width="4%"><img src="/imagenes/icono_seguro.jpg" width="30" height="30" hspace="5" vspace="5" /></td>
         	        <td width="54%"><span class="titulo_seccion">Consejos para comprar seguro</span></td>
         	        <td width="42%">&nbsp;</td>
       	        </tr>
         	      <tr>
         	        <td>&nbsp;</td>
-        	        <td>- Contacta al vendedor preferiblemente por mensaje de texto usando el número de artículo.<br /><br />
-- No pagues con servicios de Pago Anónimo como Western Unión.<br /><br />
+        	        <td>- Contacta al vendedor preferiblemente por nuestra sección, colocando tu correo eletrónico.<br /><br />
+        	        - No pagues con servicios de Pago Anónimo como Western Unión.<br /><br />
+        	        - Por tu seguridad no ingreses datos de contacto en tu pregunta.<br /><br />
 </td>
         	        <td>- Realiza todas las preguntas necesarias antes de adquirir el artículo.<br /><br />
 - Usa medios de envío seguro y asegura el envío.<br /><br /></td>
@@ -227,6 +227,29 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
       	      </table>
         	  </div></td>
       	  </tr>
+		<tr>
+			<td colspan="2">
+			<div style="width:960px; height:auto; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">
+				<div style="float:left; width:4%">
+					<img src="/imagenes/ico-preguntas.jpg" width="30" height="30" hspace="5" vspace="5" />
+				</div>
+				<div style="float:left; width:24%; height:40px; line-height:40px;">
+					<span class="titulo_seccion">Contacta al vendedor</span>
+				</div>
+				<div style="float:left; width:90%; height:auto; margin-left:5%; background-color:#D3D3D3; border-radius:5px; padding:10px;">
+					<form action="" method="post" name="form-consulta" id="form-consulta">
+						<input id="email" name="email" type="text" class="form" size="50" autocomplete="off" placeholder="Correo Electrónico" />
+						<span id="msjmail"></span>
+						<textarea name="consulta" id="consulta" class="form" style="width:90%; height:60px; margin-top:5px;" placeholder="Preguntale al vendedor"></textarea>
+						<span id="msjconsulta"></span><br />
+						<input type="button" class="form" id="preguntar" name="preguntar" value="Preguntar" style="margin-top:5px;"/>	No use lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu pregunta.
+					</form>
+					
+				</div>
+				<br clear="all" />
+			</div>
+			</td>
+		</tr>
         	<tr>
         	  <td colspan="2"><div style="width:960px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">Vendorepuestos Venezuela C.A. desea contribuir en que vendedores y compradores tengan un espacio virtual de encuentro, eliminando intermediarios haciendo del comercio una actividad  eficaz y con mas beneficios. Vendorepuestos Venezuela C.A., sugiere que antes de realizar cualquier transacción, busque distintas opciones para adquirirlos a precios racionales. <a href="/inicio/" class="bluep">www.vendorepuestos.com.ve</a> solamente  ofrece la plataforma para la publicación de los productos, pero no es propietario, no estipula precios, no asigna usos ni interviene en ninguna fase de la oferta de los artículos aquí publicados. </div></td>
       	  </tr>

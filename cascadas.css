@@ -343,6 +343,7 @@ a.pag:hover
 	border: 1px solid #D3D3D3;
 	border-radius: 5px;
     	height: 25px;
+      padding-left: 7px;
 }
 input[type="checkbox"] {
 	width:16px;

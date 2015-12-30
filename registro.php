@@ -1,4 +1,4 @@
-<? 
+<?
 include("conexion.php");
 include("configuraciones.php"); 
 session_start();
