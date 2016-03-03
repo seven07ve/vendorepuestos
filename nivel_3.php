@@ -181,7 +181,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         		<a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>"><img src="/<?php echo $carpeta_productos?>/<?php echo $b["foto1"]?>" width="145" height="108" hspace="5" vspace="5" border="0" align="left" /></a>
 				<span class="blue"><a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>" class="blue"><?php echo $b["titulo"]?></a></span><br /><?php echo $b["subtitulo"]?><br /> 
             	<span class="bluep"><a href="/articulo/<?php echo limpiar_cadena($b["titulo"])?>/<?php echo $b["id"]?>" class="bluep">Art&iacute;culo # <?php echo numero_articulo($b["id"]);?></a></span><br />
-                <?php if($b["usuario_tienda"]=="2"){?>visite <?php echo cual_usuario($b["id_usuario_tienda"],2)?><br /><a href="/tr/<?php echo limpiar_cadena(cual_usuario($b["id_usuario_tienda"],2))?>/<?php echo $b["id_usuario_tienda"]?>/0/0/1"><img src="/imagenes/icon_tr.jpg" width="33" height="25" border="0" /></a><?php }?><br /></div>
+                <?php if($b["usuario_tienda"]=="2"){?>visite <?php echo cual_usuario($b["id_usuario_tienda"],2)?><br /><a href="/<?php echo limpiar_cadena(cual_usuario($b["id_usuario_tienda"],2))?>/<?php echo $b["id_usuario_tienda"]?>/0/0/1"><img src="/imagenes/icon_tr.jpg" width="33" height="25" border="0" /></a><?php }?><br /></div>
 				<div class="red" style="width:100px; float:left;">Bs. <?php echo $b["precio"]?></div>
             	<div class="gris" style="width:100px; float:left;"><?php echo date("d-m-Y",strtotime($b["vence"]))?><br /> 
             	<?php echo cual_estado($b["id_estado"])?></div>

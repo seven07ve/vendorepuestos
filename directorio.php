@@ -94,7 +94,7 @@ include("paginar4.inc.php");
 	{
 			$carpeta = limpiar_cadena($vt["razon_social"]);?>
             <div style="width:750px; height:90px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px; float:left;">
-      		<a href="/tr/<?=limpiar_cadena($vt["nombre_oficial"])?>/<?=$vt["id"]?>/0/0/1"><img src="/<?=$carpeta?>/<?=$vt["logo"]?>" width="280" height="80" hspace="5" vspace="5" border="0" align="left" /></a><span class="blue"><?=$vt["nombre_oficial"];?></span><br />
+      		<a href="/<?=limpiar_cadena($vt["nombre_oficial"])?>/<?=$vt["id"]?>/0/0/1"><img src="/<?=$carpeta?>/<?=$vt["logo"]?>" width="280" height="80" hspace="5" vspace="5" border="0" align="left" /></a><span class="blue"><?=$vt["nombre_oficial"];?></span><br />
       		<span class="bluep">Cantidad de Art&iacute;culos: <?=cuantos_articulos($vt["id"])?>
       		</span><br /><?=$vt["descripcion"];?></a>
       		</div>

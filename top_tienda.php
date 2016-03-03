@@ -1,6 +1,6 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="<?=$color_contenido?>" style="color:<?=$color_titulo?>; border: 1px solid #D3D3D3;">
     <tr>
-      <td rowspan="4"><a href="/tr/<?=limpiar_cadena($carpeta)?>/<?=$id?>/0/0/1"><img src="/<?=$carpeta?>/<?=$vt["logo"]?>" height="80" hspace="8" border="0" align="left" class="imagel" /></a></td>
+      <td rowspan="4"><a href="/<?=limpiar_cadena($carpeta)?>/<?=$id?>/0/0/1"><img src="/<?=$carpeta?>/<?=$vt["logo"]?>" height="80" hspace="8" border="0" align="left" class="imagel" /></a></td>
       <td width="33" rowspan="4" align="right" valign="top"><strong><img src="/imagenes/icon_tr.jpg" width="33" height="25" /></strong></td>
       <td width="541" height="21" align="left" bgcolor="<?=$color_fondo;?>">&nbsp;<strong>
       <?=$vt["nombre_oficial"]?> 

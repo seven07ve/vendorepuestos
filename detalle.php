@@ -137,7 +137,7 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
               </div>
               <div style="width:250px; padding:10px; margin-top:10px; float:left">
 			  <? if($horario_vendedor!=""){?><span class="blue"><strong>Horario:</strong></span><br /><?=$horario_vendedor?><br /><? }?><br />
-			  <? if($detail["usuario_tienda"]=="2"){?><a href="/tr/<?=limpiar_cadena($nombretr)?>/<?=$detail["id_usuario_tienda"]?>/0/0/1" style="float: right; margin-top: -30px; margin-right: -80px;"><img src="/imagenes/icon_tr_grande.jpg" width="66" height="50" border="0" /></a><br />
+			  <? if($detail["usuario_tienda"]=="2"){?><a href="/<?=limpiar_cadena($nombretr)?>/<?=$detail["id_usuario_tienda"]?>/0/0/1" style="float: right; margin-top: -30px; margin-right: -80px;"><img src="/imagenes/icon_tr_grande.jpg" width="66" height="50" border="0" /></a><br />
                       <div class="blue" style="float:right; margin-top:-20px;">visite <?=$nombretr?></div>
 			  <? }
 			  elseif($detail["usuario_tienda"]=="1")

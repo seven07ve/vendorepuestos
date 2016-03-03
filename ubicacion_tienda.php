@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td valign="top">
-<div class="titulo_ruta" style="height:30px; padding-top:10px;"><a href="index.php" class="titulo_ruta">vendorepuestos.com.ve</a> > <a href="/tr/<?=limpiar_cadena($vt["nombre_oficial"])?>/<?=$id?>/" class="titulo_ruta"><?=$vt["nombre_oficial"]?></a> > <?=cual_estado($ide);?></div>
+<div class="titulo_ruta" style="height:30px; padding-top:10px;"><a href="index.php" class="titulo_ruta">vendorepuestos.com.ve</a> > <a href="/<?=limpiar_cadena($vt["nombre_oficial"])?>/<?=$id?>/" class="titulo_ruta"><?=$vt["nombre_oficial"]?></a> > <?=cual_estado($ide);?></div>
 </td>
      <td width="400" align="right"><? 
 			if($_SESSION["userid"]!="") 
@@ -104,7 +104,7 @@ jQuery(document).ready(function() {
     </tr>
      <tr>
      <td width="44"><span class="titulo_ruta" style="padding-bottom:10px;">VISTA:</span></td>
-    <td width="20"><a href="/tr/<?=$carpeta?>/<?=$id?>/0/0/1/"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
+    <td width="20"><a href="/<?=$carpeta?>/<?=$id?>/0/0/1/"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td width="100"><a href="/tr_galeria/<?=$carpeta?>/<?=$id?>/1/"><img src="/imagenes/btn_galeria.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td width="310">&nbsp;</td>
     <td>&nbsp;</td>

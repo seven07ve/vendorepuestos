@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td valign="top">
-<div class="titulo_ruta" style="height:30px; padding-top:10px;"><a href="/inicio/" class="titulo_ruta">vendorepuestos.com.ve</a> > <a href="/tr/<?=$carpeta?>/<?=$vt["id"]?>/0/0/1/" class="titulo_ruta"><?=$vt["nombre_oficial"]?></a></div>
+<div class="titulo_ruta" style="height:30px; padding-top:10px;"><a href="/inicio/" class="titulo_ruta">vendorepuestos.com.ve</a> > <a href="/<?=$carpeta?>/<?=$vt["id"]?>/0/0/1/" class="titulo_ruta"><?=$vt["nombre_oficial"]?></a></div>
 </td>
    <td width="400" align="right"><? 
 			if($_SESSION["userid"]!="") 
@@ -102,7 +102,7 @@ jQuery(document).ready(function() {
     </tr>
   <tr>
      <td width="44"><span class="titulo_ruta" style="padding-bottom:10px;">VISTA:</span></td>
-    <td width="20"><a href="/tr/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/0/1"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
+    <td width="20"><a href="/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/0/1"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td width="100"><a href="/tr_galeria/<?=cual_nombre_carpeta($id)?>/<?=$id?>/1"><img src="/imagenes/btn_galeria.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td width="310">&nbsp;</td>
     <td>&nbsp;</td>
@@ -111,8 +111,8 @@ jQuery(document).ready(function() {
   <tr height="25" background="/imagenes/bg_botonera.jpg" class="menu">
     <td colspan="3" class="link">GALERIA</td>
     <td class="link">DESCRIPCI&Oacute;N</td>
-  	<td width="110"><form action="/tr/<?=cual_nombre_carpeta($id)?>/<?=$id?>/1/0/1/" method="post">PRECIO <input type="image" name="imageField" id="imageField" src="/imagenes/icon_arrow_sist_ne.jpg" /></form></td>
-    <td width="110" ><form action="/tr/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/1/1/" method="post">
+  	<td width="110"><form action="/<?=cual_nombre_carpeta($id)?>/<?=$id?>/1/0/1/" method="post">PRECIO <input type="image" name="imageField" id="imageField" src="/imagenes/icon_arrow_sist_ne.jpg" /></form></td>
+    <td width="110" ><form action="/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/1/1/" method="post">
     VENCE 
         <input type="image" name="imageField" id="imageField" src="/imagenes/icon_arrow_sist_ne.jpg" /></form></td>
   </tr>

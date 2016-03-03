@@ -7,7 +7,7 @@ if(isset($_GET["tr"]))
 	$id = cual_id_tr($_GET["tr"]);
 	if($id!="")
 	{
-		$redirect = "/tr/".$_GET["tr"]."/".$id."/0/0/1";?>
+		$redirect = "/".$_GET["tr"]."/".$id."/0/0/1";?>
         <script language="javascript">window.location="<?=$redirect?>";</script>
 	<? }
 	else

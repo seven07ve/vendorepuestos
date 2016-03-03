@@ -110,7 +110,7 @@ jQuery(document).ready(function() {
 			$carpeta = limpiar_cadena($tim["razon_social"]);
 			$logo = "/".$carpeta."/".$tim["logo"];
         ?>
-        <a href="/tr/<?=limpiar_cadena($tim["nombre_oficial"])?>/<?=$tim["id"]?>/0/0/1"><img src="<?=$logo?>" width="260" height="69" border="0" /></a>
+        <a href="/<?=limpiar_cadena($tim["nombre_oficial"])?>/<?=$tim["id"]?>/0/0/1"><img src="<?=$logo?>" width="260" height="69" border="0" /></a>
         <? }?></div>
       <div id="ft"><a href="/tiendarepuestos/all/1"><img src="/imagenes/ver_mas_verde.jpg" width="300" height="33" border="0" /></a></div>
       <div class="titcat">NOTICIAS</div>

@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
     </tr>
   <tr>
     <td width="30"><span class="titulo_ruta" style="padding-bottom:10px;">VISTA:</span></td>
-    <td width="20"><a href="/tr/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/0/1"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
+    <td width="20"><a href="/<?=cual_nombre_carpeta($id)?>/<?=$id?>/0/0/1"><img src="/imagenes/btn_listado.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td width="20"><a href="/tr_galeria/<?=cual_nombre_carpeta($id)?>/<?=$id?>/1"><img src="/imagenes/btn_galeria.jpg" width="17" height="25" hspace="3" vspace="3" border="0" /></a></td>
     <td>&nbsp;</td>
   	</tr>

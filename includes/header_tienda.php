@@ -31,7 +31,7 @@ function MM_showHideLayers() { //v9.0
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0"><tr><td width="353" height="25" align="right"><table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td width="500" align="center"><a href="/inicio/"><img src="/imagenes/img_logo.jpg" width="487" height="70" vspace="10" border="0" /></a></td>
-    <td align="left"><span class="negro_tienda">/<a href="/tr/<?=limpiar_cadena(datos_tienda($id,"nombre_oficial"))?>/<?=$id?>/0/0/1/" class="negro_tienda">
+    <td align="left"><span class="negro_tienda">/<a href="/<?=limpiar_cadena(datos_tienda($id,"nombre_oficial"))?>/<?=$id?>/0/0/1/" class="negro_tienda">
       <?=datos_tienda($id,"nombre_oficial");?>
       </a></span></td>
   </tr>
