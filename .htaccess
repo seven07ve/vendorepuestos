@@ -7,7 +7,7 @@ RewriteCond %{SERVER_PORT} 80
 # RewriteRule ^(.*)$ https://www.vendorepuestos.com.ve/$1 [R,L]
 RewriteBase /
 RewriteRule ^inicio /index.php
-RewriteRule ^([A-Za-z0-9_-]+)$ url_tr.php?tr=$1
+RewriteRule ^([A-Za-z0-9_-]+)$ url_tr2.php?ntr=$1
 RewriteRule ^vendeTR /vende.php
 RewriteRule ^recuperar_datos /olvido_clave.php
 RewriteRule ^modificaTR /modifica.php
