@@ -7,8 +7,8 @@ include("funciones.php");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<META ID="MetaDescription" NAME="DESCRIPTION" CONTENT="Vendorepuestos es una compañía de comercio electrónico que ofrece su plataforma de búsqueda y gestión para promover servicios, publicar y promocionar artículos del ramo automotor">
-<META ID="MetaKeywords" NAME="KEYWORDS" CONTENT="repuestos, accesorios, venta, carros, ford, chevrolet, toyota, hyunday, nissan, en Caracas, Valencia, Maracaibo, Venezuela, vendorepuestos, motos, carros en venta, motos en venta, máquinas, bicicletas, barcos, Avión">
+<META ID="MetaDescription" NAME="DESCRIPTION" CONTENT="Vendorepuestos es una compaÑÐ½a de comercio electrÑƒnico que ofrece su plataforma de bÑŠsqueda y gestiÑƒn para promover servicios, publicar y promocionar artÐ½culos del ramo automotor">
+<META ID="MetaKeywords" NAME="KEYWORDS" CONTENT="repuestos, accesorios, venta, carros, ford, chevrolet, toyota, hyunday, nissan, en Caracas, Valencia, Maracaibo, Venezuela, vendorepuestos, motos, carros en venta, motos en venta, mÐ±quinas, bicicletas, barcos, AviÑƒn">
 <title>.:: Vendorepuestos.com.ve ::.</title>
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/over-text/sample.css" />

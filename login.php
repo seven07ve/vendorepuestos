@@ -36,13 +36,13 @@ function validar_login(form_login)
 {
 	if(form_login.login.value=="")
 	{ 
-    	alert("Debe ingresar un email válido para iniciar sesión");     
+    	alert("Debe ingresar un email vÃ¡lido para iniciar sesiÃ³n");     
 		form_login.login.focus();
 		return false;
 	}
 	if(form_login.clave.value=="")
 	{
-		alert("Debe completar el campo clave para iniciar sesión");
+		alert("Debe completar el campo clave para iniciar sesiÃ³n");
 		form_login.clave.focus();
 		return false;
 	}
@@ -60,8 +60,8 @@ function validar_login(form_login)
     <div class="titulo_ruta" style="height:30px; padding-top:10px;"><a href="index.php" class="titulo_ruta">vendorepuestos.com.ve</a> > <a href="/tiendarepuestos/all/1" class="titulo_ruta">Tiendarepuestos</a> > <a href="login.php" class="titulo_ruta">Iniciar Sesi&oacute;n</a></div>
     </td>
     <td align="right" valign="top">
-    <a href="/registroTR/" class="blue">¿Deseas una TIENDAREPUESTOS?</a>
-    <!-- <a href="/iniciar_sesion/" class="blue">¿Ya esta inscrito? Mi TIENDAREPUESTOS</a> -->
+    <a href="/registroTR/" class="blue">Â¿Deseas una TIENDAREPUESTOS?</a>
+    <!-- <a href="/iniciar_sesion/" class="blue">Â¿Ya esta inscrito? Mi TIENDAREPUESTOS</a> -->
     </td>
   </tr>
   <tr>
@@ -123,7 +123,7 @@ function validar_login(form_login)
           <input name="usuario_tienda" type="hidden" value="2"/>
           <input type="hidden" name="paso" value="1" />
           <div align="center">
-            <a href="/registroTR/" class="blue">¿Deseas una TIENDAREPUESTOS?</a><br />
+            <a href="/registroTR/" class="blue">Â¿Deseas una TIENDAREPUESTOS?</a><br />
           </div>
           <!-- <input name="" type="image"  value="Submit" src="/imagenes/btn_inscribete.jpg" /><br />-->
             <!-- <img src="/imagenes/icon_tr.jpg" width="33" height="25" hspace="5" vspace="5" /> -->

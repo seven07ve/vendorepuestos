@@ -37,7 +37,7 @@ $(document).ready(function(){
         }
 
     });
-    //para borrar mensajes
+    //para borrar mensajes de advertencia
     $('#email').keyup(function(){
         $('#msjmail').fadeOut(1000);
     });
