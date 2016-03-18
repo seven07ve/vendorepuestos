@@ -40,6 +40,10 @@ elseif($detail["usuario_tienda"]==2){
     $horario_vendedor = $vdv["horario"];
     $nombretr = $vdv["nombre_oficial"];
 }
+	/*perguntas al vendedor*/
+		$lista_preg = mysql_query("SELECT * FROM preguntas WHERE id_producto='$idp' ORDER BY id_preg DESC");
+	$tot_preg = mysql_num_rows($lista_preg);
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -229,24 +233,49 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
             </tr>
         <tr>
             <td colspan="2">
-            <div style="width:960px; height:auto; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">
-                <div style="float:left; width:4%">
+            <!--CONTACTA AL VENDEDOR-->
+            <div class="cont-contac">
+                <div class="contact-img">
                     <img src="/imagenes/ico-preguntas.jpg" width="30" height="30" hspace="5" vspace="5" />
                 </div>
-                <div style="float:left; width:24%; height:40px; line-height:40px;">
+                <div class="contact-text">
                     <span class="titulo_seccion">Contacta al vendedor</span>
                 </div>
-                <div style="float:left; width:90%; height:auto; margin-left:5%; background-color:#D3D3D3; border-radius:5px; padding:10px;">
+                <div class="cont-form">
                     <form action="" method="post" name="form-consulta" id="form-consulta">
+                       <input id="id-prod" name="id-prod" type="hidden" value="<?php echo $idp ?>">
                         <input id="email" name="email" type="text" class="form" size="50" autocomplete="off" placeholder="Correo Electrónico" />
                         <span id="msjmail"></span>
-                        <textarea name="consulta" id="consulta" class="form" style="width:90%; height:60px; margin-top:5px; margin-right:7%;" placeholder="Preguntale al vendedor"></textarea>
+                        <textarea name="consulta" id="consulta" class="form" placeholder="Preguntale al vendedor"></textarea>
                         <span id="msjconsulta"></span>
                         <input type="button" class="form" id="preguntar" name="preguntar" value="Preguntar" style="margin-top:5px;"/><img src="/imagenes/cargando3.gif" id="mini-cargando" class="mini-loading" /><span style="margin-left:5px;">No uses lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu pregunta.</span>
                     </form>
 
                 </div>
-                <br clear="all" />
+<?php
+if($tot_preg > 0){
+		/*cont preguntas y respuestas*/
+		echo '<div id="cont-preg-resp" class="cont-preg-resp">';
+	while($row=mysql_fetch_array($lista_preg)){
+		/*pregunta*/
+		echo '<div class="preg">
+                		<img src="/imagenes/ico-pregunta.jpg" width="20" height="20" hspace="5"/>
+						'.$row["pregunta"].'
+                	</div>';
+		/*revisa si hay respuesta*/
+		if ($row["status"] == 2){
+				$respuesta = mysql_query("SELECT * FROM respuestas WHERE id_resp='".$row["id_resp"]."'");
+				$cont_resp = mysql_fetch_array($respuesta);
+			/*respuesta*/
+				echo '<div class="resp">
+                		<img src="/imagenes/ico-respuesta.jpg" width="20" height="20" hspace="5"/>'.$cont_resp["respuesta"].'
+                	</div>';
+		}
+	}
+	echo '</div>';
+}
+?>
+			<br clear="all" />
             </div>
             </td>
         </tr>
