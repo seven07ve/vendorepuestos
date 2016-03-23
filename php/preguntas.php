@@ -33,7 +33,7 @@ else{
 				$respuesta = mysql_query("SELECT * FROM respuestas WHERE id_resp='".$row["id_resp"]."'");
 				$cont_resp = mysql_fetch_array($respuesta);
 			/*respuesta*/
-				$mensaje . '<div class="resp">
+				$mensaje .= '<div class="resp">
                 		<img src="/imagenes/ico-respuesta.jpg" width="20" height="20" hspace="5"/>'.$cont_resp["respuesta"].'
                 	</div>';
 		}
