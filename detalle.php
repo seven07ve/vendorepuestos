@@ -48,7 +48,7 @@ elseif($detail["usuario_tienda"]==2){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>.:: Vendorepuestos.com.ve ::.</title>
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -124,7 +124,7 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
                 El vendedor identificado en este anuncio es el &uacute;nico responsable de los datos y procedencia del art&iacute;culo. Vendorepuestos.com.ve no vende este art&iacute;culo, no fija su precio y no participa en niguna negociaci&oacute;n, solo se encarga de su publicaci&oacute;n.<br /><br />
                 <div style="background:#D3D3D3; padding:10px;">
                 <?=$detail["condicion"]?> <br />
-                <?=cual_estado($detail["id_estado"])?> / <?=cual_ciudad($detail["id_ciudad"])?><br />
+                <?php echo cual_estado($detail["id_estado"]); ?> / <?=cual_ciudad($detail["id_ciudad"])?><br />
                 Finaliza el: <?=date("d-m-Y",strtotime($detail["vence"]))?><br />
                 </div>
                 <div style="width:250px; padding:10px; border-right-width:thin; border-right-color:#D3D3D3; border-right-style:solid; margin-top:10px; float:left">
@@ -133,7 +133,7 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
                   <? if($telefono_vendedor2!="") {?>- <?=$telefono_vendedor2?><br /><? }?><br />
                   <? if($pin!="") {?><span class="blue">Pin</span><br />
                  - <?=$pin?><br /><? }?><br />
-                 <span class="blue">Comparte este artículo</span><br />
+                 <span class="blue">Comparte este art&iacute;culo</span><br />
                  <div class="addthis_toolbox addthis_default_style">
                     <a class="addthis_button_facebook" style="cursor:pointer" addthis:url="http://vendorepuestos.com.ve<?=$_SERVER['REDIRECT_URL'];?>" addthis:title="<?php echo $detail["titulo"]; ?>"></a>
                     <a class="addthis_button_twitter" style="cursor:pointer" addthis:url="http://vendorepuestos.com.ve<?=$_SERVER['REDIRECT_URL'];?>" addthis:title="<?php echo $detail["titulo"]; ?>"></a>
@@ -221,12 +221,12 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
-                    <td>- Contacta al vendedor preferiblemente por nuestra sección, colocando tu correo eletrónico.<br /><br />
-                    - No pagues con servicios de Pago Anónimo como Western Unión.<br /><br />
+                    <td>- Contacta al vendedor preferiblemente por nuestra secci&oacute;n, colocando tu correo eletr&oacute;nico.<br /><br />
+                    - No pagues con servicios de Pago An&oacute;nimo como Western Uni&oacute;n.<br /><br />
                     - Por tu seguridad no ingreses datos de contacto en tu pregunta.<br /><br />
 </td>
-                    <td>- Realiza todas las preguntas necesarias antes de adquirir el artículo.<br /><br />
-- Usa medios de envío seguro y asegura el envío.<br /><br /></td>
+                    <td>- Realiza todas las preguntas necesarias antes de adquirir el art&iacute;culo.<br /><br />
+- Usa medios de env&iacute;o seguro y asegura el env&iacute;o.<br /><br /></td>
                   </tr>
                 </table>
               </div></td>
@@ -244,7 +244,7 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
                 <div class="cont-form">
                     <form action="" method="post" name="form-consulta" id="form-consulta">
                        <input id="id-prod" name="id-prod" type="hidden" value="<?php echo $idp ?>">
-                        <input id="email" name="email" type="text" class="form" size="50" autocomplete="off" placeholder="Correo Electrónico" />
+                        <input id="email" name="email" type="text" class="form" size="50" autocomplete="off" placeholder="Correo Electr&oacute;nico" />
                         <span id="msjmail"></span>
                         <textarea name="consulta" id="consulta" class="form" placeholder="Preguntale al vendedor"></textarea>
                         <span id="msjconsulta"></span>
@@ -280,7 +280,7 @@ if($tot_preg > 0){
             </td>
         </tr>
             <tr>
-              <td colspan="2"><div style="width:960px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">Vendorepuestos Venezuela C.A. desea contribuir en que vendedores y compradores tengan un espacio virtual de encuentro, eliminando intermediarios haciendo del comercio una actividad  eficaz y con mas beneficios. Vendorepuestos Venezuela C.A., sugiere que antes de realizar cualquier transacción, busque distintas opciones para adquirirlos a precios racionales. <a href="/inicio/" class="bluep">www.vendorepuestos.com.ve</a> solamente  ofrece la plataforma para la publicación de los productos, pero no es propietario, no estipula precios, no asigna usos ni interviene en ninguna fase de la oferta de los artículos aquí publicados. </div></td>
+              <td colspan="2"><div style="width:960px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 5px; padding:8px;">Vendorepuestos Venezuela C.A. desea contribuir en que vendedores y compradores tengan un espacio virtual de encuentro, eliminando intermediarios haciendo del comercio una actividad  eficaz y con mas beneficios. Vendorepuestos Venezuela C.A., sugiere que antes de realizar cualquier transacci&oacute;n, busque distintas opciones para adquirirlos a precios racionales. <a href="/inicio/" class="bluep">www.vendorepuestos.com.ve</a> solamente  ofrece la plataforma para la publicaci&oacute;n de los productos, pero no es propietario, no estipula precios, no asigna usos ni interviene en ninguna fase de la oferta de los art&iacute;culos aqu&iacute; publicados. </div></td>
             </tr>
           </table>
       </div>

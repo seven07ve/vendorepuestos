@@ -81,7 +81,8 @@ $carpeta = limpiar_cadena($resul["razon_social"]);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta charset="utf-8" />
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
 <title>.:: Vendorepuestos.com.ve ::.</title>
 <link href="/cascadas.css" rel="stylesheet" type="text/css" />
 <!-- <script type="text/javascript" src="/js/prototype.js"></script> -->
@@ -132,7 +133,7 @@ function validar(formy)
   }
   if((formy.email.value.indexOf ('@', 0) == -1) || (formy.email.value.indexOf ('.', 0) == -1) ||(formy.email.value.length < 5))
   { 
-      alert("Debe escribir una dirección de e-mail valida");     
+      alert("Debe escribir una direcci? de e-mail valida");     
     formy.email.focus();
     return false;
   }
@@ -144,13 +145,13 @@ function validar(formy)
   }
   if(formy.contrasena.value.length<6 || formy.contrasena.value.length>8)
   {
-    alert("Debe ingresar una contraseña entre 6 y 8 caracteres");
+    alert("Debe ingresar una contrase? entre 6 y 8 caracteres");
     formy.contrasena.focus();
     return false;
   }
   if(formy.confirmacion.value=="" || formy.contrasena.value!=formy.confirmacion.value)
   {
-    alert("Debe ingresar la confirmación de la contraseña valida");
+    alert("Debe ingresar la confirmaci? de la contrase? valida");
     formy.confirmacion.focus();
     return false;
   }
@@ -214,9 +215,7 @@ function cambiar(elemId){
           <a href="/articulos_finalizados/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_6_off.jpg" name="fin" width="171" height="20" border="0" /></a>
         </td>
       </tr>
-      <tr>
-        <td height="8" colspan="6" background="/imagenes/login_bg_bot.jpg"></td>
-      </tr>
+		<?php echo preguntas($_SESSION["userid"]); ?>
     </table>
   </td>
 </tr>

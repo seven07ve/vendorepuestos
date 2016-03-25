@@ -54,7 +54,7 @@ if(isset($_POST["solicitar_paquete"]))
 	Datos de la TIENDAREPUESTOS<br>
 	Nombre de la TIENDAREPUESTOS: $nombretr<br>
 	Documento de Identidad: $riftr<br>
-	N鷐ero de orden: $orden<br>
+	N煤mero de orden: $orden<br>
 	Paquete solicitado: $paquete<br>";
 	
 	$send_mail = mail($to2, $subject2, $message, $headers);
@@ -64,10 +64,10 @@ if(isset($_POST["solicitar_paquete"]))
 	Datos de la TIENDAREPUESTOS<br>
 	Nombre de la TIENDAREPUESTOS: $nombretr<br>
 	Documento de Identidad: $riftr<br>
-	N鷐ero de orden: $orden<br>
+	N煤mero de orden: $orden<br>
 	Paquete solicitado: $paquete<br><br>
-	No olvide reportar el monto pagado al Centro de Pagos para su activaci髇, usando el  n鷐ero de art韈ulo y n鷐ero de referencia bancaria usando exclusivamente la siguiente informaci髇.<br><br>
-	<b>Informaci髇 Bancaria</b><br>
+	No olvide reportar el monto pagado al Centro de Pagos para su activaci贸n, usando el  n煤mero de art铆culo y n煤mero de referencia bancaria usando exclusivamente la siguiente informaci贸n.<br><br>
+	<b>Informaci贸n Bancaria</b><br>
 	Tipo de Cuenta: Corriente <br>
 	Titular: Vendorepuestos Venezuela CA <br>  
 	RIF: J-31737187-9<br>
@@ -77,7 +77,7 @@ if(isset($_POST["solicitar_paquete"]))
 	Banco Provincial	0108-0334-92-0100113038<br>
 	Banco de Venezuela 	0102-0859-93-0000009166<br> 
 	Banco Mercantil	0105-0672-75-1672068541 <br><br>
-	Para informaci髇 adicional contacte nuestra secci髇 de Preguntas Frecuentes o a nuestro equipo de Soporte En L韓ea  v韆 Twitter @vendorepuestos<br><br>  
+	Para informaci贸n adicional contacte nuestra secci贸n de Preguntas Frecuentes o a nuestro equipo de Soporte En L铆nea  v铆a Twitter @vendorepuestos<br><br>  
 	Gracias por usar vendorepuestos.com.ve.<br><br>
 	Saludos.<br><br>";
 		
@@ -128,9 +128,7 @@ function validar(formy)
           <td width="141"><a href="/articulos_activos/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_5_off.jpg" name="act" width="141" height="20" border="0" /></a></td>
           <td width="171"><a href="/articulos_finalizados/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_6_off.jpg" name="fin" width="171" height="20" border="0" /></a></td>
         </tr>
-        <tr>
-          <td height="8" colspan="6" background="/imagenes/login_bg_bot.jpg"></td>
-        </tr>
+        <?php echo preguntas($_SESSION["userid"]); ?>
       </table></td>
   </tr>
   <tr>

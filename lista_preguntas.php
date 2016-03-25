@@ -13,14 +13,11 @@ $vt = mysql_fetch_array($ver_tienda);
 $carpeta = limpiar_cadena($vt["razon_social"]);
 $nombretr = limpiar_cadena($vt["nombre_oficial"]);
 
-if($_GET['sw']=='1'){
-	$idofer = $_GET["idofer"];
-	$update = mysql_query("UPDATE productos SET oferta_dia='1' WHERE id='$idofer' && usuario_tienda='2' && id_usuario_tienda='$id'");
-	$update_otros =  mysql_query("UPDATE productos SET oferta_dia='0' WHERE id!='$idofer' && usuario_tienda='2' && id_usuario_tienda='$id'");
-}
+/*perguntas al vendedor*/
+	$_pagi_sql = "SELECT * FROM productos, preguntas WHERE productos.id_usuario_tienda = $id AND preguntas.id_producto=productos.id AND preguntas.status < 2 ORDER BY preguntas.id_preg DESC";
+	$_pagi_cuantos= 10;
+	include("paginar6.inc.php");
 
-$_pagi_sql = "SELECT * FROM productos WHERE usuario_tienda='2' && id_usuario_tienda='$id' && vence>=NOW() ORDER BY fecha_publicacion DESC";
-include("paginar4.inc.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,10 +33,35 @@ include("paginar4.inc.php");
 		$('img.captify').captify({});
 	});
 	</script>
+  <!-- validar busqueda -->
+<script language="javascript">
+function validar_buscar(forma)
+{
+  cadena = forma.palabra.value;
+  if(cadena!="")
+  {
+    cadena = cadena.replace(/À|Á|Â|Ã|Ä|Å|à|á|â|ã|ä|å|Ò|Ó|Ô|Õ|Ö|Ø|ò|ó|ô|õ|ö|ø|È|É|Ê|Ë|è|é|ê|ë|Ç|ç|Ì|Í|Î|Ï|ì|í|î|ï|Ù|Ú|Û|Ü|ù|ú|û|ü|ÿ|Ñ|ñ|\.|\/|\#/, '-');
+    cadena = cadena.replace(/ /gi, '-');
+    forma.action="/buscar/"+forma.categoria_buscar.value+"/"+cadena+"/0/1";
+    return true;
+  }
+  else
+  {
+    forma.action="/buscar/"+forma.categoria_buscar.value+"/todos/0/1";
+    return true;
+  }
+}
+</script>
 <script type="text/javascript">
 function activar_oferta(id)
 {
 		window.location.href="/articulos_oferta/<?=$carpeta?>/1/"+id;	
+}
+</script>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
 }
 </script>
 </head>
@@ -49,8 +71,8 @@ function activar_oferta(id)
   <tr>
     <td colspan="3" valign="top"><table border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
-          <td height="30" colspan="5" class="titulo_ruta"><?=$nombretr?> > Mi Cuenta > Productos Activos</td>
-          <td align="right" colspan="2"><? 
+          <td height="30" colspan="4" class="titulo_ruta"><?=$nombretr?> > Mi Cuenta > Productos Activos</td>
+          <td align="right" colspan="3"><? 
 			if($_SESSION["userid"]!="") 
 			{
                 echo " <span class=\"blue\">Hola ".strtoupper(cual_usuario($_SESSION["userid"],$_SESSION["usertipo"]))."</span>";?>
@@ -66,39 +88,28 @@ function activar_oferta(id)
           <td width="141"><a href="/articulos_activos/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_5_on.jpg" name="act" width="141" height="20" border="0" /></a></td>
           <td width="171"><a href="/articulos_finalizados/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_6_off.jpg" name="fin" width="171" height="20" border="0" /></a></td>
         </tr>
-        <?php echo preguntas($_SESSION["userid"]); ?>
+        
       </table></td>
   </tr>
   <tr>
     <td colspan="3" valign="top">&nbsp;</td>
   </tr>
-    <tr>
-    <td>
-    <!-- Buscador -->
-    <table width="600" border="0" cellpadding="0" cellspacing="0">
-    <form method="post" action="/mis_articulos/" name="form_bus" id="form_bus">
-      <tr>
-        <td width="500" align="left"><input name="palabra" type="text" class="formt"value="" /></td>
-        <td width="100" align="left"><input name="button" type="image" id="button" value="Submit" src="/imagenes/btn_busca_dere.jpg" /></td>
-      </tr>
-      </form>
-    </table>      
-    </td>
-  </tr>
   <tr>
     <td width="625" colspan="3" valign="top">
        <table width="100%" border="0" align="right" cellpadding="3" cellspacing="0">
   <tr>
-    <td colspan="6" class="titulo_seccion"><span class="red"><?=$_pagi_totalReg;?></span> Art&iacute;culos Activos</td>
+	<?php echo preguntas($_SESSION["userid"]); ?>
+        
+    <td colspan="4"  class="titulo_seccion" style="text-align:right;"></td>
     </tr>
   <tr height="25" background="/imagenes/bg_botonera.jpg" class="menu">
     <td width="154" class="link">FOTO</td>
     <td width="210" class="link">DESCRIPCI&Oacute;N</td>
-    <td width="110">PRECIO</td>
-    <td width="110">VISITAS</td>
+    <td width="550">PREGUNTA</td>
+<!--    <td width="110">VISITAS</td>
     <td width="110">ARTICULO #</td>
     <td width="110">VENCE</td>
-    <td width="110">ACCIONES</td>
+    <td width="110">ACCIONES</td>-->
   </tr>
     </table>
       <div class="titulo_categoria" style="padding-bottom:10px; clear:both;"></div>
@@ -107,17 +118,27 @@ function activar_oferta(id)
 	{
 			$carpeta_productos = cual_nombre_carpeta($_SESSION["userid"])."/productos";
     ?>
-      <div style="width:960px; height:110px; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px;">
+      <div style="width:960px; height:auto; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px;">
         <div style="width:360px; float:left;">
           <a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>"><img src="/<?=$carpeta_productos?>/<?=$vpt["foto1"]?>" width="125" height="88" hspace="5" vspace="5" border="0" align="left" /></a><span class="blue"><a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>" class="blue"><?=$vpt["titulo"]?></a></span><br />
-          <?=$vpt["subtitulo"]?></div>
-        <div class="red" style="width:120px; float:left;"><?=$vpt["precio"]?></div>
-        <div class="gris" style="width:120px; float:left;"><?=$vpt["visitas"]?></div>
-        <div class="gris" style="width:120px; float:left;"><?=numero_articulo($vpt["id"]);?></div>
-        <div class="gris" style="width:120px; float:left;"><?=$vpt["vence"]?><br /> 
-            <?=cual_estado($vpt["id_estado"])?></div>
-        <div class="gris" style="width:120px; float:left;">Oferta del dia:<input type="radio" name="activo" id="1" <? if($vpt["oferta_dia"]=="1"){?>checked="checked"<? }?> onClick="activar_oferta(<?=$vpt["id"]?>)" /><br />
-          <span class="bluep"><a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>/" class="bluep">ver</a> | <a href="/articulo_editar/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>/" class="bluep">editar</a> | <a href="javascript:;" onClick="javascript: if(confirm('Esta seguro que sea eliminar este Articulo?')) window.location='/articulo_eliminar/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>/';" class="bluep">eliminar</a> </span></div></div>
+          <?php echo $vpt["subtitulo"].'<br>Precio: '.$vpt["precio"]; ?></div>
+        <div style="width:600px; float:left;">
+			<div id="cont-preg-resp" class="cont-preg-resp">
+				<div class="preg">
+                		<img src="/imagenes/ico-pregunta.jpg" width="20" height="20" hspace="5"/>
+						<?php echo $vpt["pregunta"]; ?>
+                	</div>
+			</div>
+			<div class="cont-form">
+				<form action="" method="post" name="form-consulta" id="form-consulta">
+				   <input id="id-prod" name="id-prod" type="hidden" value="<?php echo $idp ?>">
+					<textarea name="consulta" id="consulta" class="form" placeholder="Responder la pregunta"></textarea>
+					<span id="msjconsulta"></span>
+					<input type="button" class="form" id="preguntar" name="preguntar" value="Responder" style="margin-top:5px;"/><img src="/imagenes/cargando3.gif" id="mini-cargando" class="mini-loading" /><span style="margin-left:5px;">No uses lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu respuesta.</span>
+				</form>
+			</div>
+        </div><br clear="all">
+        </div>
       <? }?>
     </td>
   </tr>
@@ -125,10 +146,10 @@ function activar_oferta(id)
     <td valign="top" colspan="3"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#e1e1e1">
       <form name="form_pag" action="" method="post">
         <tr>
-          <td width="100" class="pag">P&aacute;g <?=$_pagi_actual;?> de <?=$_pagi_totalPags?></td>
+          <td width="200" class="pag">P&aacute;g <?=$_pagi_actual;?> de <?=$_pagi_totalPags?></td>
           <td align="center" class="pag"><?=$_pagi_navegacion?></td>
-          <td width="80" align="right">Ir a la p&aacute;gina:&nbsp;</td>
-          <td width="40" align="right"><input name="pg" type="text" class="formpag" size="3" /></td>
+          <td width="100" align="right">Ir a la p&aacute;gina:&nbsp;</td>
+          <td width="50" align="right"><input name="pg" type="text" class="formpag" size="3" /></td>
           <td width="30" align="right"><input name="input" type="image" src="/imagenes/btn_ir.jpg" /></td>
           </tr>
         </form>

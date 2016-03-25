@@ -75,9 +75,7 @@ function validar(formy)
           <td width="141"><a href="/articulos_activos/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_5_off.jpg" name="act" width="141" height="20" border="0" /></a></td>
           <td width="171"><a href="/articulos_finalizados/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_6_off.jpg" name="fin" width="171" height="20" border="0" /></a></td>
         </tr>
-        <tr>
-          <td height="8" colspan="7" background="/imagenes/login_bg_bot.jpg"></td>
-        </tr>
+        <?php echo preguntas($_SESSION["userid"]); ?>
       </table></td>
   </tr>
   <tr>
