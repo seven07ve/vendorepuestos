@@ -48,7 +48,7 @@ while($fila = mysql_fetch_array($res_pri)){
       echo $productos_venc = $productos_venc;
 		}
 		//email al cliente
-		echo $to = $email;
+		$to = $email;
 		$subject = "Productos a vencer";
 		$headers  = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; utf-8\n";

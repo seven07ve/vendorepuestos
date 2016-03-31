@@ -1,5 +1,7 @@
 <?php
 include("../conexion.php");
+//include("funciones_mail.php");
+include("funciones_mail.php");
 $email = $_REQUEST["email"];
 $pregunta = $_REQUEST["pregunta"];
 $id_prod = $_REQUEST["idprod"];
@@ -40,6 +42,26 @@ else{
 	}
 //	echo '</div>';
 }
+/*-------------   enviar el correo al dueno del producto     ------------------------*/
+//busca datos del proveedor
+$ver_tienda = mysql_query("SELECT * FROM productos, tienda_virtual WHERE productos.id='8609' AND productos.id_usuario_tienda=tienda_virtual.id");
+$vt = mysql_fetch_array($ver_tienda);
+$email = $vt["email"];
+//titulo del email
+$nombre = $vt["nombre_oficial"];
+//contenido del email
+$texto = 'Te han hecho una pregunta <a href="http://vendorepuestos.dev/iniciar_sesion/">Ver pregunta</a>';
+//crea el cuerpo del correo
+$cuerpo = layoutMail($nombre, $texto);
+
+$subject = "Tienes una pregunta";
+$headers  = "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; utf-8\n";
+$headers .= "X-Priority: 1\n";
+$headers .= "From: administracion@vendorepuestos.com.ve\r\n";
+$send_mail = mail($email, $subject, $cuerpo, $headers);
+
+
 echo $mensaje;
 return;
 ?>
