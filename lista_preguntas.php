@@ -85,7 +85,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <td width="131"><a href="/estado_cuenta/<?=limpiar_cadena($nombretr)?>"><img src="/imagenes/login_btn_2_off.jpg" name="edo" width="131" height="20" border="0" /></a></td>
           <td width="143"><a href="/datos_vendedor/<?=limpiar_cadena($nombretr)?>"><img src="/imagenes/login_btn_3_off.jpg" name="datos" width="143" height="20" border="0" /></a></td>
           <td width="192"><a href="/publicaciones/<?=limpiar_cadena($nombretr)?>"><img src="/imagenes/login_btn_4_off.jpg" name="pub" width="192" height="20" border="0" /></a></td>
-          <td width="141"><a href="/articulos_activos/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_5_on.jpg" name="act" width="141" height="20" border="0" /></a></td>
+          <td width="141"><a href="/articulos_activos/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_5_off.jpg" name="act" width="141" height="20" border="0" /></a></td>
           <td width="171"><a href="/articulos_finalizados/<?=limpiar_cadena($nombretr)?>/1"><img src="/imagenes/login_btn_6_off.jpg" name="fin" width="171" height="20" border="0" /></a></td>
         </tr>
         
@@ -98,8 +98,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td width="625" colspan="3" valign="top">
        <table width="100%" border="0" align="right" cellpadding="3" cellspacing="0">
   <tr>
-	<?php echo preguntas($_SESSION["userid"]); ?>
-        
+	<?php echo preguntasLista($_SESSION["userid"]); ?>
     <td colspan="4"  class="titulo_seccion" style="text-align:right;"></td>
     </tr>
   <tr height="25" background="/imagenes/bg_botonera.jpg" class="menu">
@@ -114,6 +113,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     </table>
       <div class="titulo_categoria" style="padding-bottom:10px; clear:both;"></div>
       <?
+	$cont = 1;
 	while($vpt = mysql_fetch_array($_pagi_result))
 	{
 			$carpeta_productos = cual_nombre_carpeta($_SESSION["userid"])."/productos";
@@ -122,14 +122,18 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <div style="width:360px; float:left;">
           <a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>"><img src="/<?=$carpeta_productos?>/<?=$vpt["foto1"]?>" width="125" height="88" hspace="5" vspace="5" border="0" align="left" /></a><span class="blue"><a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>" class="blue"><?=$vpt["titulo"]?></a></span><br />
           <?php echo $vpt["subtitulo"].'<br>Precio: '.$vpt["precio"]; ?></div>
+          <!--pregunta-->
         <div style="width:600px; float:left;">
-			<div id="cont-preg-resp" class="cont-preg-resp">
+			<div id="cont-preg-resp<?php echo $cont; ?>" class="cont-preg-resp">
 				<div class="preg">
                 		<img src="/imagenes/ico-pregunta.jpg" width="20" height="20" hspace="5"/>
 						<?php echo $vpt["pregunta"]; ?>
                 	</div>
 			</div>
-			<div class="cont-form">
+			<!--boton respuesta-->
+			<input type="button" id="responder_<?php echo $cont; ?>" class="form" value="Responder" style="float:right; margin-right: 10px;">
+			<!--formulario para responder-->
+			<div id="cont-form<?php echo $cont; ?>" class="cont-form" style="display:none;">
 				<form action="" method="post" name="form-consulta" id="form-consulta">
 				   <input id="id-prod" name="id-prod" type="hidden" value="<?php echo $idp ?>">
 					<textarea name="consulta" id="consulta" class="form" placeholder="Responder la pregunta"></textarea>
@@ -139,7 +143,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 			</div>
         </div><br clear="all">
         </div>
-      <? }?>
+      <?php
+		$cont++;
+		}
+		?>
     </td>
   </tr>
   <tr>
@@ -157,5 +164,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </tr>
 </table>
 <?php include("includes/footer.php"); ?>
+<script>
+	$(document).ready(function() {
+		$("input").click(function(event) {
+			var clickId = event.target.id.split("_");
+			alert("#"+this.id);
+			$("#"+this.id).fadeOut("slow")
+			$( "#cont-form"+clickId[1]).fadeIn( "slow" );
+		});
+	});
+</script>
 </body>
 </html>

@@ -11,18 +11,44 @@ function preguntas(){
 	}
 	elseif ($total == 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="preguntas" style="text-decoration:none;">Tienes una Pregunta</a></td>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes una Pregunta</a></td>
       </tr>';
 	}
 	elseif ($total > 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'" style="text-decoration:none;">Tienes '.$total.' Preguntas</a></td>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes '.$total.' Preguntas</a></td>
       </tr>';
 	}
 	//$result=mysql_fetch_array(mysql_query("SELECT * FROM menu WHERE id=$id"));
 	return $seccion;
 }
-
+/*
+esta es solo para cuando ya se esta en la lista de preguntas
+para que no repita preguntas/preguntas
+*/
+function preguntasLista(){
+	$id = $_SESSION["userid"];
+	$nombretr = cual_nombre_oficial($_SESSION["userid"]);
+	$busqueda = mysql_query("SELECT * FROM productos, preguntas WHERE productos.id_usuario_tienda = $id AND preguntas.id_producto=productos.id AND preguntas.status=0");
+	$total = mysql_num_rows($busqueda);
+	if ($total == 0){
+		$seccion= '<tr>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"></td>
+      </tr>';
+	}
+	elseif ($total == 1){
+		$seccion= '<tr>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="" style="text-decoration:none;">Tienes una Pregunta</a></td>
+      </tr>';
+	}
+	elseif ($total > 1){
+		$seccion= '<tr>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="" style="text-decoration:none;">Tienes '.$total.' Preguntas</a></td>
+      </tr>';
+	}
+	//$result=mysql_fetch_array(mysql_query("SELECT * FROM menu WHERE id=$id"));
+	return $seccion;
+}
 function generate_salt($cant){
 	if(!$cant || is_null($cant)) $cant = 10;
 	
