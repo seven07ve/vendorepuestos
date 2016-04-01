@@ -50,7 +50,7 @@ $email = $vt["email"];
 //titulo del email
 $nombre = $vt["nombre_oficial"];
 //contenido del email
-$texto = 'Te han hecho una pregunta <a href="http://vendorepuestos.dev/iniciar_sesion/">Ver pregunta</a>';
+$texto = 'Te han hecho una pregunta <a href="http://vendorepuestos.com.ve/iniciar_sesion/">Ver pregunta</a>';
 //crea el cuerpo del correo
 $cuerpo = layoutMail($nombre, $texto);
 
