@@ -1,63 +1,57 @@
 $(document).ready(function(){
-    $('#preguntar').click(function () {
-        var mail = $('#email').val();
-        var consulta = $('#consulta').val().trim();
-		var idProd = $('#id-prod').val();
-        //console.log('ss'+idProd);
-/*		if((mail.indexOf ('@', 0) == -1) || (mail.indexOf ('.', 0) == -1) ||(mail.length < 5)){*/
-        var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (!expr.test(mail)){
-            $('#msjmail').replaceWith('<span id="msjmail">Debe escribir una direcci&oacute;n de correo valida para poder contactarle</span>');
-            $('#email').focus();
-            $('#msjmail').append("");
-            $('#msjmail').css({
-                        "color": "#FD6868",
-                        "font-weight": "bold",
-                        "display": "none"
-                    });
-            $('#msjmail').fadeIn(1000);
-            $('#msjmail').css({
-                "display": "block"
-                    });
-        }
-        else if(consulta == ""){
-            $('#msjconsulta').fadeIn(1000).replaceWith('<span id="msjconsulta">Debe realizar la pregunta al vendedor</span>');
-            $('#msjconsulta').css({
-                "color": "#FD6868",
-                "font-weight": "bold",
-                "display": "none"
-                    });
-            $('#msjconsulta').fadeIn(1000);
-            $('#msjconsulta').css({
-                "display": "block"
-            });
-        }
-        else{
-            $('#mini-cargando').fadeIn(1000);
-			/*guarda la pregunta*/
-			var datos = 'email='+mail+'&pregunta='+consulta+'&idprod='+idProd;
-			console.log("xx"+datos);
-			$.ajax({
-				url: "/../php/preguntas.php",
-				type: "POST",
-				data: datos,
-				success: function(data){
-					console.log("tt"+data);
-					document.getElementById("cont-preg-resp").innerHTML = data;
-					$('#email').val("");
-					$('#consulta').val("");
-				}
+	$("input").click(function(event) {
+		var clickId = event.target.id.split("_");
+		
+		/*si es el el boton de mostrar*/
+		if (clickId[0] == 'btnresp'){
+			var clickId = event.target.id.split("_");
+			/*boton responder*/
+			$("#btnresp_"+clickId[1]).fadeOut("slow");
+			/*formulario*/
+			$( "#cont-form"+clickId[1]).fadeIn( "slow" );
+		}
+		/*si es el boton de responder pregunta*/
+		else if(clickId[0] == 'responder'){
+			var respuesta = $('#respuesta'+clickId[1]).val().trim();
+			var idProd = $('#id-prod'+clickId[1]).val();
+			var idPreg = $('#id-preg'+clickId[1]).val();
+			var email = $('#email'+clickId[1]).val();
+			
+			if(respuesta == ""){
+				var msjrespuesta = '#msjrespuesta'+clickId[1];
+				$(msjrespuesta).fadeIn(1000).replaceWith('<span id="msjrespuesta'+clickId[1]+'">Debe responder al cliente</span>');
+				$(msjrespuesta).css({
+					"color": "#FD6868",
+					"font-weight": "bold",
+					"display": "none"
+				});
+				$(msjrespuesta).fadeIn(1000);
+				$(msjrespuesta).css({
+					"display": "block"
+				});
+			}
+			
+			else{
+				$('#mini-cargando'+clickId[1]).fadeIn(1000);
+				/*guarda la pregunta*/
+				var datos = 'respuesta='+respuesta+'&idprod='+idProd+'&idpreg='+idPreg+'&email='+email;
+				$.ajax({
+					url: "/../php/respuestas.php",
+					type: "POST",
+					data: datos,
+					success: function(data){
+						console.log("tt"+data);
+						document.getElementById("cont-preg-resp"+clickId[1]).innerHTML = data;
+						//$('#producto'+clickId[1]).css( "display", "none" );
+					}
+				});
+				$('#mini-cargando'+clickId[1]).fadeOut(1000);
+			}
+			//para borrar mensajes de advertencia
+
+			$('#respuesta'+clickId[1]).keyup(function(){
+				$(msjrespuesta).fadeOut(1000);
 			});
-            $('#mini-cargando').fadeOut(1000);
-        }
-
-    });
-    //para borrar mensajes de advertencia
-    $('#email').keyup(function(){
-        $('#msjmail').fadeOut(1000);
-    });
-
-    $('#consulta').keyup(function(){
-        $('#msjconsulta').fadeOut(1000);
-    });
+		}
+	});
 });

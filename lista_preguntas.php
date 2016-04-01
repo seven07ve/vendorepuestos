@@ -28,6 +28,9 @@ $nombretr = limpiar_cadena($vt["nombre_oficial"]);
 <link rel="stylesheet" type="text/css" href="/over-text/sample.css" />
 	<script type="text/javascript" src="/over-text/jquery.js"></script>
 	<script type="text/javascript" src="/over-text/captify.tiny.js"></script>
+	<!--para las respuestas-->
+	<!--<script type="text/javascript" src="/js/preguntas.js"></script>-->
+	<script type="text/javascript" src="/js/respuestas.js" ></script>
 	<script type="text/javascript">
 	$(function(){
 		$('img.captify').captify({});
@@ -105,10 +108,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td width="154" class="link">FOTO</td>
     <td width="210" class="link">DESCRIPCI&Oacute;N</td>
     <td width="550">PREGUNTA</td>
-<!--    <td width="110">VISITAS</td>
-    <td width="110">ARTICULO #</td>
-    <td width="110">VENCE</td>
-    <td width="110">ACCIONES</td>-->
   </tr>
     </table>
       <div class="titulo_categoria" style="padding-bottom:10px; clear:both;"></div>
@@ -118,7 +117,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	{
 			$carpeta_productos = cual_nombre_carpeta($_SESSION["userid"])."/productos";
     ?>
-      <div style="width:960px; height:auto; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px;">
+		<div id="producto<?php echo $cont; ?>" style="width:960px; height:auto; border-radius: 10px;border: 1px solid #D3D3D3; margin:0 0 5px 0; padding:8px;">
         <div style="width:360px; float:left;">
           <a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>"><img src="/<?=$carpeta_productos?>/<?=$vpt["foto1"]?>" width="125" height="88" hspace="5" vspace="5" border="0" align="left" /></a><span class="blue"><a href="/articulo/<?=limpiar_cadena($vpt["titulo"])?>/<?=$vpt["id"]?>" class="blue"><?=$vpt["titulo"]?></a></span><br />
           <?php echo $vpt["subtitulo"].'<br>Precio: '.$vpt["precio"]; ?></div>
@@ -131,14 +130,16 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 	</div>
 			</div>
 			<!--boton respuesta-->
-			<input type="button" id="responder_<?php echo $cont; ?>" class="form" value="Responder" style="float:right; margin-right: 10px;">
+			<input type="button" id="btnresp_<?php echo $cont; ?>" class="form" value="Responder" style="float:right; margin-right: 10px;">
 			<!--formulario para responder-->
 			<div id="cont-form<?php echo $cont; ?>" class="cont-form" style="display:none;">
 				<form action="" method="post" name="form-consulta" id="form-consulta">
-				   <input id="id-prod" name="id-prod" type="hidden" value="<?php echo $idp ?>">
-					<textarea name="consulta" id="consulta" class="form" placeholder="Responder la pregunta"></textarea>
-					<span id="msjconsulta"></span>
-					<input type="button" class="form" id="preguntar" name="preguntar" value="Responder" style="margin-top:5px;"/><img src="/imagenes/cargando3.gif" id="mini-cargando" class="mini-loading" /><span style="margin-left:5px;">No uses lenguaje vulgar. Por tu seguridad no ingreses datos de contacto en tu respuesta.</span>
+					<input id="id-prod<?php echo $cont; ?>" name="id-prod<?php echo $cont; ?>" type="hidden" value="<?php echo $vpt["id_producto"] ?>">
+					<input id="id-preg<?php echo $cont; ?>" name="id-preg<?php echo $cont; ?>" type="hidden" value="<?php echo $vpt["id_preg"] ?>">
+					<input id="email<?php echo $cont; ?>" name="email<?php echo $cont; ?>" type="hidden" value="<?php echo $vpt["email"] ?>">
+					<textarea name="respuesta<?php echo $cont; ?>" id="respuesta<?php echo $cont; ?>" class="form" placeholder="Responder la pregunta"></textarea>
+					<span id="msjrespuesta<?php echo $cont; ?>"></span>
+					<input type="button" class="form" id="responder_<?php echo $cont; ?>" name="responder_<?php echo $cont; ?>" value="Responder" style="margin-top:5px;"/><img src="/imagenes/cargando3.gif" id="mini-cargando<?php echo $cont; ?>" class="mini-loading" /><span style="margin-left:5px;">No uses lenguaje vulgar. Por tu seguridad no ingreses datos personales en tu respuesta.</span>
 				</form>
 			</div>
         </div><br clear="all">
@@ -165,14 +166,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </table>
 <?php include("includes/footer.php"); ?>
 <script>
-	$(document).ready(function() {
+/*	$(document).ready(function() {
 		$("input").click(function(event) {
-			var clickId = event.target.id.split("_");
-			alert("#"+this.id);
-			$("#"+this.id).fadeOut("slow")
-			$( "#cont-form"+clickId[1]).fadeIn( "slow" );
+
 		});
-	});
+	});*/
 </script>
 </body>
 </html>

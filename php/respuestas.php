@@ -2,28 +2,40 @@
 include("../conexion.php");
 //include("funciones_mail.php");
 include("funciones_mail.php");
-$email = $_REQUEST["email"];
-$pregunta = $_REQUEST["pregunta"];
+$respuesta = $_REQUEST["respuesta"];
 $id_prod = $_REQUEST["idprod"];
+$id_preg = $_REQUEST["idpreg"];
+/*correo cliente*/
+$email = $_REQUEST["email"];
 
-/*guarda la pregunta*/
-$sentencia = "INSERT INTO preguntas (pregunta, email, id_producto) VALUES ('%s', '%s', '%d')";
-$sent_trat = sprintf($sentencia, $pregunta, $email, $id_prod);
+/*si ya tiene una respuesta*/
+$busq_preg = mysql_query("SELECT * FROM preguntas WHERE id_preg='$id_preg'");
+while($pre=mysql_fetch_array($busq_preg)){
+	$resp =$pre["id_resp"];
+	$borrar_resp = mysql_query("DELETE FROM respuestas WHERE id_resp='$resp'");
+}
+/*guarda la respuesta*/
+$sentencia = "INSERT INTO respuestas (respuesta) VALUES ('%s')";
+$sent_trat = sprintf($sentencia, $respuesta);
 $insertar = mysql_query($sent_trat);
 //guarda el numero de la ultima id creada por autoincremento
-$id_preg = mysql_insert_id();
+$id_resp = mysql_insert_id();
 if ($id_preg == 0){
-	$mensaje = 'No se pudo guardar la pregunta';
+	$mensaje = 'No se pudo guardar la respuesta';
 }
 elseif($id_preg == false){
 	$mensaje = 'No se estableció una conexión MySQL';
 }
 else{
-	/*perguntas al vendedor*/
-	$lista_preg = mysql_query("SELECT * FROM preguntas WHERE id_producto='$id_prod' ORDER BY id_preg DESC");
+	/*actualiza la tabla preguntas*/
+	$sent_act = "UPDATE preguntas SET id_resp='%d', status='2'  WHERE id_preg='$id_preg'";
+	$act_trat = sprintf($sent_act, $id_resp);
+	$act_pregunta = mysql_query($act_trat);
+	/*pergunta al vendedor con respuesta*/
+	$lista_preg = mysql_query("SELECT * FROM preguntas WHERE id_preg='$id_preg'");
 			/*cont preguntas y respuestas*/
 //	echo '<div id="cont-preg-resp" class="cont-preg-resp">';
-	$mensaje = "";
+	//$mensaje = $act_trat;
 	while($row=mysql_fetch_array($lista_preg)){
 		/*pregunta*/
 		$mensaje .= '<div class="preg">
@@ -42,19 +54,19 @@ else{
 	}
 //	echo '</div>';
 }
-/*-------------   enviar el correo al dueno del producto     ------------------------*/
-//busca datos del proveedor
-$ver_tienda = mysql_query("SELECT * FROM productos, tienda_virtual WHERE productos.id='$id_prod' AND productos.id_usuario_tienda=tienda_virtual.id");
+/*-------------   enviar el correo al cliente del producto     ------------------------*/
+//busca nombre del articilo
+$ver_tienda = mysql_query("SELECT * FROM productos WHERE productos.id='$id_prod'");
 $vt = mysql_fetch_array($ver_tienda);
-$email = $vt["email"];
+$titulo = $vt["titulo"];
 //titulo del email
-$nombre = $vt["nombre_oficial"];
+$tit_mail = "Respuesta";
 //contenido del email
-$texto = 'Te han hecho una pregunta <a href="http://vendorepuestos.dev/iniciar_sesion/">Ver pregunta</a>';
+$texto = 'Han respondido tu pregunta <a href="http://vendorepuestos.dev/articulo/'.$titulo.'/'.$id_prod.'">Ver respuesta</a>';
 //crea el cuerpo del correo
-$cuerpo = layoutMail($nombre, $texto);
+$cuerpo = layoutMail($tit_mail, $texto);
 
-$subject = "Tienes una pregunta";
+$subject = "Respondierón tu pregunta";
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; utf-8\n";
 $headers .= "X-Priority: 1\n";
