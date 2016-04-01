@@ -253,9 +253,10 @@ document.getElementById(''+id3+'').style.visibility = "hidden"
 
                 </div>
 <?php
+	echo '<div id="cont-preg-resp" class="cont-preg-resp">';
 if($tot_preg > 0){
 		/*cont preguntas y respuestas*/
-		echo '<div id="cont-preg-resp" class="cont-preg-resp">';
+		
 	while($row=mysql_fetch_array($lista_preg)){
 		/*pregunta*/
 		echo '<div class="preg">
@@ -272,8 +273,9 @@ if($tot_preg > 0){
                 	</div>';
 		}
 	}
-	echo '</div>';
+	
 }
+							  echo '</div>';
 ?>
 			<br clear="all" />
             </div>
