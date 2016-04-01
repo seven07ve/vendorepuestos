@@ -1,6 +1,7 @@
 <?php
 include("../conexion.php");
 //include("funciones_mail.php");
+include("../funciones.php");
 include("funciones_mail.php");
 $respuesta = $_REQUEST["respuesta"];
 $id_prod = $_REQUEST["idprod"];
@@ -62,8 +63,8 @@ $titulo = $vt["titulo"];
 //titulo del email
 $tit_mail = "Respuesta";
 //contenido del email
-$texto = 'Han respondido tu pregunta <a href="http://vendorepuestos.dev/articulo/'.$titulo.'/'.$id_prod.'">Ver respuesta</a>';
-//crea el cuerpo del correo
+$texto = 'Han respondido tu pregunta <a href="http://vendorepuestos.com.ve/articulo/'.limpiar_cadena($titulo).'/'.$id_prod.'">Ver respuesta</a>';
+//crea el cuerpo del correo 
 $cuerpo = layoutMail($tit_mail, $texto);
 
 $subject = "Respondierón tu pregunta";
