@@ -42,7 +42,7 @@ $(document).ready(function(){
 				type: "POST",
 				data: datos,
 				success: function(data){
-					console.log("tt"+data);
+					//console.log("tt"+data);
 					document.getElementById("cont-preg-resp").innerHTML = data;
 					$('#email').val("");
 					$('#consulta').val("");
