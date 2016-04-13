@@ -36,6 +36,7 @@ RewriteRule ^mis_articulos /lista_result.php
 RewriteRule ^articulos_finalizados/([A-Za-z0-9_-]+)/([0-9]+) /lista_fin.php?ntr=$1&pg=$2
 RewriteRule ^articulos_finalizado/([A-Za-z0-9_-]+)/([0-9]+)/([A-Za-z0-9_-]+) /listas_fin.php?ntr=$1&pg=$2&ord=$3
 RewriteRule ^preguntas/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+) /lista_preguntas.php?ntr=$1&pg=$2
+RewriteRule ^respuestas/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+) /lista_respuestas.php?ntr=$1&pg=$2
 RewriteRule ^datos_vendedor/([A-Za-z0-9_-]+) /datos.php?ntr=$1
 RewriteRule ^articulo_editar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_editar.php?ntr=$1&idp=$2
 RewriteRule ^articulo_eliminar/([A-Za-z0-9_-]+)/([0-9]+) /publicaciones_eliminar.php?ntr=$1&idp=$2

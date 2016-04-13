@@ -1,22 +1,24 @@
 <?php
 function preguntas(){
+	//esta funcion es ppara todas las pagina menos la de listas de preguntas
+	//la de listas de preguntas es la que sigue
 	$id = $_SESSION["userid"];
 	$nombretr = cual_nombre_oficial($_SESSION["userid"]);
 	$busqueda = mysql_query("SELECT * FROM productos, preguntas WHERE productos.id_usuario_tienda = $id AND preguntas.id_producto=productos.id AND preguntas.status=0");
 	$total = mysql_num_rows($busqueda);
 	if ($total == 0){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"></td>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	elseif ($total == 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes una Pregunta</a></td>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes una Pregunta</a> | <a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	elseif ($total > 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes '.$total.' Preguntas</a></td>
+        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="../../preguntas/'.$nombretr.'/0/" style="text-decoration:none;">Tienes '.$total.' Preguntas</a> | <a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	//$result=mysql_fetch_array(mysql_query("SELECT * FROM menu WHERE id=$id"));
@@ -33,17 +35,17 @@ function preguntasLista(){
 	$total = mysql_num_rows($busqueda);
 	if ($total == 0){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"></td>
+        <td colspan="3" class="blue" style="text-align:right; height:30px;"> <a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	elseif ($total == 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="" style="text-decoration:none;">Tienes una Pregunta</a></td>
+        <td colspan="3" class="blue" style="text-align:right; height:30px;"><a href="/preguntas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Tienes una Pregunta</a> | <a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	elseif ($total > 1){
 		$seccion= '<tr>
-        <td colspan="7" class="blue" style="text-align:right; height:30px;"><a href="" style="text-decoration:none;">Tienes '.$total.' Preguntas</a></td>
+		<td colspan="3" class="blue" style="text-align:right; height:30px;"><a href="/preguntas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Tienes '.$total.' Preguntas</a> | <a href="/respuestas/'.limpiar_cadena($nombretr).'/0/" style="text-decoration:none;">Respuestas</a></td>
       </tr>';
 	}
 	//$result=mysql_fetch_array(mysql_query("SELECT * FROM menu WHERE id=$id"));

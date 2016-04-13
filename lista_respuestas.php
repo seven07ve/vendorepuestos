@@ -102,7 +102,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        <table width="100%" border="0" align="right" cellpadding="3" cellspacing="0">
   <tr>
 	<?php echo preguntasLista($_SESSION["userid"]); ?>
-	  <td colspan="3"  class="titulo_seccion" style="text-align:left;">Preguntas</td>
+    <td colspan="3"  class="titulo_seccion" style="text-align:left;">Respuestas</td>
     </tr>
   <tr height="25" background="/imagenes/bg_botonera.jpg" class="menu">
     <td width="154" class="link">FOTO</td>
